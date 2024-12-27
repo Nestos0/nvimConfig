@@ -17,20 +17,27 @@ return {
 		"saghen/blink.cmp",
 		build = "cargo build --release",
 		opts = {
-			keymap = {
-				preset = "default",
-
-				["<Tab>"] = {
-					function(cmp)
-						if cmp.snippet_active() then
-							return cmp.accept()
-						else
-							return cmp.select_and_accept()
-						end
+			completion = {
+				list = {
+					selection = function(ctx)
+						return ctx.mode == "cmdline" and "auto_insert" or "preselect"
 					end,
-					"snippet_forward",
-					"fallback",
 				},
+			},
+			keymap = {
+				preset = "none",
+
+				["<C-m>"] = { "show", "show_documentation", "hide_documentation" },
+				["<CR>"] = { "accept", "fallback" },
+				["<C-e>"] = { "hide", "fallback" },
+
+				["<Tab>"] = { "select_next", "fallback" },
+				["<S-Tab>"] = { "select_prev", "fallback" },
+				["<C-p>"] = { "snippet_backward", "fallback" },
+				["<C-n>"] = { "snippet_forward", "fallback" },
+
+				["<C-b>"] = { "scroll_documentation_up", "fallback" },
+				["<C-f>"] = { "scroll_documentation_down", "fallback" },
 			},
 			sources = {
 				-- add lazydev to your completion providers
