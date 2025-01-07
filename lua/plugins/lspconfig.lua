@@ -1,6 +1,7 @@
 return {
 	"williamboman/mason.nvim",
 	"williamboman/mason-lspconfig.nvim",
+	"rafamadriz/friendly-snippets",
 	"neovim/nvim-lspconfig",
 	{
 		"folke/lazydev.nvim",
@@ -19,22 +20,33 @@ return {
 		opts = {
 			completion = {
 				list = {
-					selection = function(ctx)
-						return ctx.mode == "cmdline" and "auto_insert" or "preselect"
-					end,
+					selection = {
+				           preselect = function (ctx)
+				               if ctx.mode ~= "cmdline" then return end
+				           end
+				       },
 				},
 			},
 			keymap = {
-				preset = "none",
+				preset = "super-tab",
+				cmdline = {
+					["<C-n>"] = { "show", "show_documentation", "hide_documentation" },
+					["<CR>"] = { "accept", "fallback" },
+					["<C-e>"] = { "hide", "fallback" },
 
-				["<C-m>"] = { "show", "show_documentation", "hide_documentation" },
+					["<Tab>"] = { "show", "select_next", "fallback" },
+					["<S-Tab>"] = { "select_prev", "fallback" },
+
+					["<C-b>"] = { "scroll_documentation_up", "fallback" },
+					["<C-f>"] = { "scroll_documentation_down", "fallback" },
+				},
+
+				["<C-n>"] = { "show", "show_documentation", "hide_documentation" },
 				["<CR>"] = { "accept", "fallback" },
 				["<C-e>"] = { "hide", "fallback" },
 
 				["<Tab>"] = { "select_next", "fallback" },
 				["<S-Tab>"] = { "select_prev", "fallback" },
-				["<C-p>"] = { "snippet_backward", "fallback" },
-				["<C-n>"] = { "snippet_forward", "fallback" },
 
 				["<C-b>"] = { "scroll_documentation_up", "fallback" },
 				["<C-f>"] = { "scroll_documentation_down", "fallback" },

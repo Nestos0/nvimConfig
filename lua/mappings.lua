@@ -6,6 +6,11 @@ nest.applyKeymaps({
 		"<leader>",
 		{
 			{
+				"u",
+				"<cmd>Telescope undo<CR>",
+				options = { silent = true, desc = "Undo History" }
+			},
+			{
 				"sa",
 				'<cmd>!wl-paste | fold -w1 | sort | paste -sd "" | paste -sd "" | tr -d \'\\n\' | wl-copy<CR><CR>',
 				options = { silent = true, desc = "Sort copied by alphabet" },
@@ -20,20 +25,20 @@ nest.applyKeymaps({
 		{ "j", "<undo>", options = { desc = "Undo" } },
 		{ "J", "<redo>", options = { desc = "Redo" } },
 		{ "w", "<Insert>", options = { desc = "Insert" } },
-		{ "k", "w", options = { desc = "Forward to next word" } },
+		{ "l", "w", options = { desc = "Forward to next word" } },
 		{ "h", "n", options = { desc = "Repeat latest find" } },
-		{ "l", "e", options = { desc = "Forward to next word end" } },
+		{ "k", "e", options = { desc = "Forward to next word end" } },
 		{
 			"<S-",
 			{
-				{ "u>", function() neoscroll.ctrl_u({ duration = 250 }) end, options = { desc = "Scroll Up" }},
+				{ "u>", function() neoscroll.scroll(-vim.wo.scroll, { move_cursor = true, duration = 250 }) end, options = { desc = "Scroll Up" }},
 				{ "e>", function() neoscroll.scroll(vim.wo.scroll, { move_cursor = true, duration = 250 }) end, options = { desc = "Scroll Down" }},
 				{ "w>", "I", options = { desc = "Insert start" } },
-				{ "k>", "W", options = { desc = "Forward to next WORD" } },
+				{ "l>", "W", options = { desc = "Forward to next WORD" } },
 				{ "n>", "^", options = { desc = "Cursor to Begin of line" } },
 				{ "i>", "$", options = { desc = "Cursor to End of line" } },
 				{ "h>", "N", options = { desc = "Repeat latest find(opposite)" } },
-				{ "l>", "E", options = { desc = "Forward to next WORD end" } },
+				{ "k>", "E", options = { desc = "Forward to next WORD end" } },
 			},
 		},
 		{

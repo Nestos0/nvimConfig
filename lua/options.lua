@@ -1,19 +1,25 @@
 local opt = vim.opt
 local o = vim.o
 local g = vim.g
+local wo = vim.wo
 
 -------------------------------------- options ------------------------------------------
 o.laststatus = 3
 o.showmode = false
+
+wo.scroll = 15
 
 o.clipboard = "unnamedplus"
 o.cursorline = true
 o.cursorlineopt = "number"
 
 -- Indenting
-o.expandtab = false
+o.expandtab = true
+o.autoindent = true
 o.smartindent = true
---o.tabstop = 2
+o.tabstop = 4
+o.shiftwidth = 4
+o.softtabstop = 4
 
 opt.fillchars = { eob = " " }
 o.ignorecase = true
