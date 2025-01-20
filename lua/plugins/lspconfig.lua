@@ -1,4 +1,9 @@
 return {
+	"VonHeikemen/lsp-zero.nvim",
+	-- "jbyuki/one-small-step-for-vimkind",
+	"mfussenegger/nvim-dap",
+	"jay-babu/mason-nvim-dap.nvim",
+	"WhoIsSethDaniel/mason-tool-installer.nvim",
 	"williamboman/mason.nvim",
 	"williamboman/mason-lspconfig.nvim",
 	"rafamadriz/friendly-snippets",
@@ -17,18 +22,37 @@ return {
 	{ -- optional blink completion source for require statements and module annotations
 		"saghen/blink.cmp",
 		build = "cargo build --release",
+		dependencies = {
+			"rafamadriz/friendly-snippets",
+			-- add blink.compat to dependencies
+			{
+				"saghen/blink.compat",
+				opts = {},
+				lazy = true,
+				version = "*",
+			},
+		},
+		event = "InsertEnter",
 		opts = {
 			completion = {
-				list = {
-					selection = {
-				           preselect = function (ctx)
-				               if ctx.mode ~= "cmdline" then return end
-				           end
-				       },
+				accept = {
+					-- experimental auto-brackets support
+					auto_brackets = {
+						enabled = true,
+					},
+				},
+				menu = {
+					draw = {
+						treesitter = { "lsp" },
+					},
+				},
+				documentation = {
+					auto_show = true,
+					auto_show_delay_ms = 200,
 				},
 			},
 			keymap = {
-				preset = "super-tab",
+				preset = "none",
 				cmdline = {
 					["<C-n>"] = { "show", "show_documentation", "hide_documentation" },
 					["<CR>"] = { "accept", "fallback" },
@@ -53,7 +77,8 @@ return {
 			},
 			sources = {
 				-- add lazydev to your completion providers
-				default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+				default = { "lazydev", "lsp", "path", "snippets", "buffer"},
+				cmdline = { "lazydev", "path" },
 				providers = {
 					lazydev = {
 						name = "LazyDev",

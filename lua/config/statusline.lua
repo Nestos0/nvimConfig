@@ -1,7 +1,6 @@
 -- Eviline config for lualine
 -- Author: shadmansaleh
 -- Credit: glepnir
-local lualine = require('lualine')
 
 -- Color table for highlights
 -- stylua: ignore
@@ -39,6 +38,10 @@ local config = {
     -- Disable sections and component separators
     component_separators = '',
     section_separators = '',
+    disabled_filetypes = {
+      statusline = { "neo-tree", "neo-tree-popup", "notify", "Avante", "AvanteInput", },
+      winbar = {},
+    },
     theme = {
       -- We are going to use lualine_c an lualine_x as left and
       -- right section. Both are highlighted by c theme .  So we
@@ -217,6 +220,4 @@ ins_right {
   padding = { left = 1 },
 }
 
--- Now don't forget to initialize lualine
-lualine.setup(config)
-
+return config

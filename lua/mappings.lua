@@ -1,15 +1,9 @@
 local nest = require("nest")
-local neoscroll = require("neoscroll")
 
 nest.applyKeymaps({
 	{
 		"<leader>",
 		{
-			{
-				"u",
-				"<cmd>Telescope undo<CR>",
-				options = { silent = true, desc = "Undo History" }
-			},
 			{
 				"sa",
 				'<cmd>!wl-paste | fold -w1 | sort | paste -sd "" | paste -sd "" | tr -d \'\\n\' | wl-copy<CR><CR>',
@@ -31,8 +25,8 @@ nest.applyKeymaps({
 		{
 			"<S-",
 			{
-				{ "u>", function() neoscroll.scroll(-vim.wo.scroll, { move_cursor = true, duration = 250 }) end, options = { desc = "Scroll Up" }},
-				{ "e>", function() neoscroll.scroll(vim.wo.scroll, { move_cursor = true, duration = 250 }) end, options = { desc = "Scroll Down" }},
+				{ "u>", "<C-U>", options = { desc = "Scroll Up" } },
+				{ "e>", "<C-D>", options = { desc = "Scroll Down" } },
 				{ "w>", "I", options = { desc = "Insert start" } },
 				{ "l>", "W", options = { desc = "Forward to next WORD" } },
 				{ "n>", "^", options = { desc = "Cursor to Begin of line" } },
@@ -67,7 +61,8 @@ nest.applyKeymaps({
 			{
 				{ "V>", "<cmd>vsplit<CR>" },
 				{ "B>", "<cmd>split<CR>" },
-				{ "q", "<cmd>bd | bp<CR>" },
+				{ "q>", "<cmd>bd | bp<CR>" },
+				{ "m>", "<cmd>Neotree toggle<CR>", options = { desc = "Toggle Neotree" } },
 			},
 		},
 		{
@@ -75,6 +70,8 @@ nest.applyKeymaps({
 			{
 				{ "l", "ge", options = { desc = "Backward to next word end" } },
 				{ "L", "gE", options = { desc = "Backward to next WORD end" } },
+				{ "u", "gk", options = { desc = "Move cursor up one display line" } },
+				{ "e", "gj", options = { desc = "Move cursor down one display line" } },
 
 			}
 		},

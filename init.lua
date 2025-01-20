@@ -1,7 +1,5 @@
 require("config.lazy")
 require("config.colorscheme")
-require("config.statusline")
 require("config.lspconfig")
 require("options")
 require("mappings")
-require("neoscroll")

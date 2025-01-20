@@ -4,6 +4,5 @@ return {
 		opts = {}
 	},
 	    "debugloop/telescope-undo.nvim",
-
 }
 
