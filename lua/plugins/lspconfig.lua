@@ -1,7 +1,6 @@
 return {
 	"VonHeikemen/lsp-zero.nvim",
 	-- "jbyuki/one-small-step-for-vimkind",
-	"mfussenegger/nvim-dap",
 	"jay-babu/mason-nvim-dap.nvim",
 	"WhoIsSethDaniel/mason-tool-installer.nvim",
 	"williamboman/mason.nvim",

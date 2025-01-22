@@ -1,5 +1,10 @@
 return {
 	{
+		"undotest",
+		dev = true,
+		opts = {},
+	},
+	{
 		"folke/trouble.nvim",
 		cmd = { "Trouble" },
 		opts = {
