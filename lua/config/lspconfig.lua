@@ -38,6 +38,7 @@ require("mason-lspconfig").setup({
 		"ts_ls",
 		"jsonls",
 		"volar",
+        "emmet_ls"
 	},
 	automatic_installation = { exclude = {} },
 	handlers = handlers,
@@ -119,3 +120,46 @@ vim.api.nvim_create_autocmd('FileType', {
         end
     end
 })
+
+local configs = require("lspconfig/configs")
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+lspconfig.emmet_ls.setup({
+	-- on_attach = on_attach,
+	capabilities = capabilities,
+	filetypes = {
+		"css",
+		"eruby",
+		"html",
+		"javascript",
+		"javascriptreact",
+		"less",
+		"sass",
+		"typescript",
+		"scss",
+		"svelte",
+		"pug",
+		"typescriptreact",
+		"vue",
+	},
+	init_options = {
+		html = {
+			options = {
+				-- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+				["bem.enabled"] = true,
+			},
+		},
+	},
+})
+
+-- if last char is number, and the only completion item is provided by rime-ls, accept it
+require('blink.cmp.completion.list').show_emitter:on(function(event)
+    if not vim.g.rime_enabled then return end
+    local col = vim.fn.col('.') - 1
+    -- if you don't want use number to select, change the match pattern by yourself
+    if event.context.line:sub(col, col):match("%d") == nil then return end
+    local rime_item_index = require("rime_ls").get_n_rime_item_index(2, event.items)
+    if #rime_item_index ~= 1 then return end
+    require('blink.cmp').accept({ index = rime_item_index[1] })
+end)
