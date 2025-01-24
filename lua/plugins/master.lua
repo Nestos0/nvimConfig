@@ -5,6 +5,23 @@ return {
 	-- 	opts = {},
 	-- },
 	{
+		"LazyVim/LazyVim",
+		priority = 10000,
+		lazy = false,
+		opts = {
+			defaults = {
+				autocmds = true, -- lazyvim.config.autocmds
+				keymaps = false, -- lazyvim.config.keymaps
+			},
+			news = {
+				lazyvim = false,
+				neovim = false,
+			},
+		},
+		cond = true,
+		version = "*",
+	},
+	{
 		"folke/trouble.nvim",
 		cmd = { "Trouble" },
 		opts = {

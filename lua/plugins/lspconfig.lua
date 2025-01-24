@@ -7,7 +7,9 @@ return {
 	"williamboman/mason.nvim",
 	"williamboman/mason-lspconfig.nvim",
 	"rafamadriz/friendly-snippets",
-	"neovim/nvim-lspconfig",
+	{
+		"neovim/nvim-lspconfig",
+	},
 	{
 		"folke/lazydev.nvim",
 		ft = "lua", -- only load on lua files
