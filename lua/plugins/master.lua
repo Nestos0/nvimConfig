@@ -63,12 +63,14 @@ return {
 		opts = {},
 	},
 	-- Auto-Pairs
+    --
 	{
 		"altermo/ultimate-autopair.nvim",
+        enabled = false,
 		event = { "InsertEnter", "CmdlineEnter" },
 		opts = {
 			--Config goes here
-			-- cmap = false,
+			profile = "default",
 			fastwarp = {
 				enable = true,
 				map = "<A-k>",

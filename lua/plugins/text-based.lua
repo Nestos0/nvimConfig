@@ -33,10 +33,10 @@ return {
 					lua = { "stylua" },
 					-- Conform will run multiple formatters sequentially
 					python = { "isort", "black" },
-					javascript = { { "prettierd", "prettier" } },
-					typescript = { { "prettierd", "prettier" } },
-					typescriptreact = { { "prettierd", "prettier", "biome" } },
-					javascriptreact = { { "prettierd", "prettier", "biome" } },
+					javascript = { "prettierd", "prettier" },
+					typescript = { "prettierd", "prettier" },
+					typescriptreact = { "prettierd", "prettier", "biome" },
+					javascriptreact = { "prettierd", "prettier", "biome" },
 				},
                 formatters = {
                     biome = { require_cwd = true }
