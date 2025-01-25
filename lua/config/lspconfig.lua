@@ -24,7 +24,7 @@ local handlers = {
 }
 
 require("mason").setup({
-	ensure_installed = { "hadolint" },
+	ensure_installed = { "hadolint", "eslint_d" },
 })
 require("mason-lspconfig").setup({
 	ensure_installed = {
@@ -42,7 +42,8 @@ require("mason-lspconfig").setup({
 		"volar",
 		"dockerls",
 		"docker_compose_language_service",
-        "nginx_language_server"
+        "nginx_language_server",
+        "eslint"
 	},
 	automatic_installation = { exclude = {} },
 	handlers = handlers,
