@@ -1,7 +1,5 @@
 return {
-	{ "rime_ls", dev = true, dir = vim.fn.stdpath("config") .. "/" .. "rime_ls" },
 	"VonHeikemen/lsp-zero.nvim",
-	-- "jbyuki/one-small-step-for-vimkind",
 	"jay-babu/mason-nvim-dap.nvim",
 	"WhoIsSethDaniel/mason-tool-installer.nvim",
 	"williamboman/mason.nvim",
@@ -81,50 +79,6 @@ return {
 
 				["<C-b>"] = { "scroll_documentation_up", "fallback" },
 				["<C-f>"] = { "scroll_documentation_down", "fallback" },
-				["<space>"] = {
-					function(cmp)
-						if not vim.g.rime_enabled then
-							return false
-						end
-						local rime_item_index = require("rime_ls").get_n_rime_item_index(1)
-						if #rime_item_index ~= 1 then
-							return false
-						end
-						-- If you want to select more than once,
-						-- just update this cmp.accept with vim.api.nvim_feedkeys('1', 'n', true)
-						-- The rest can be updated similarly
-						return cmp.accept({ index = rime_item_index[1] })
-					end,
-					"fallback",
-				},
-				[";"] = {
-					-- FIX: can not work when binding ;<space> to other functionality
-					-- such inputting a Chinese punctuation
-					function(cmp)
-						if not vim.g.rime_enabled then
-							return false
-						end
-						local rime_item_index = require("rime_ls").get_n_rime_item_index(2)
-						if #rime_item_index ~= 2 then
-							return false
-						end
-						return cmp.accept({ index = rime_item_index[2] })
-					end,
-					"fallback",
-				},
-				["'"] = {
-					function(cmp)
-						if not vim.g.rime_enabled then
-							return false
-						end
-						local rime_item_index = require("rime_ls").get_n_rime_item_index(3)
-						if #rime_item_index ~= 3 then
-							return false
-						end
-						return cmp.accept({ index = rime_item_index[3] })
-					end,
-					"fallback",
-				},
 			},
 			sources = {
 				-- add lazydev to your completion providers

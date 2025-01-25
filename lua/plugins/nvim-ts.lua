@@ -4,10 +4,15 @@ return {
 		build = ":TSUpdate",
 		opts = {
 			ensure_installed = { "c", "lua", "vim", "vimdoc", "javascript", "html", "ruby", "go", "vue" },
-            autotag = {
-                enable = true,
-                filetype = { "html", "vue" }
-            },
+			autotag = {
+				enable = true,
+				filetype = { "html", "vue" },
+			},
+			context_commentstring = {
+				disable = {},
+				enable = true,
+				module_path = "ts_context_commentstring.internal",
+			},
 			sync_install = true,
 			highlight = { enable = true },
 			indent = { enable = true },
