@@ -3,7 +3,11 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		opts = {
-			ensure_installed = { "c", "lua", "vim", "vimdoc", "javascript", "html", "ruby", "go" },
+			ensure_installed = { "c", "lua", "vim", "vimdoc", "javascript", "html", "ruby", "go", "vue" },
+            autotag = {
+                enable = true,
+                filetype = { "html", "vue" }
+            },
 			sync_install = true,
 			highlight = { enable = true },
 			indent = { enable = true },

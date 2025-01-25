@@ -42,6 +42,7 @@ require("mason-lspconfig").setup({
 		"volar",
 		"dockerls",
 		"docker_compose_language_service",
+        "nginx_language_server"
 	},
 	automatic_installation = { exclude = {} },
 	handlers = handlers,
