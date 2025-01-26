@@ -79,22 +79,6 @@ return {
 		priority = 1000,
 		opts = {},
 	},
-	-- Auto-Pairs
-	{
-		"altermo/ultimate-autopair.nvim",
-		event = { "InsertEnter", "CmdlineEnter" },
-		opts = {
-			--Config goes here
-			-- cmap = false,
-			fastwarp = {
-				enable = true,
-				map = "<A-k>",
-				rmap = "<A-K>",
-				cmap = "<A-k>",
-				rcmap = "<A-K>",
-			},
-		},
-	},
 	-- Which Key
 	{
 		"folke/which-key.nvim",
