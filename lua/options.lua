@@ -26,6 +26,7 @@ o.ignorecase = true
 o.smartcase = true
 o.mouse = "a"
 
+o.formatoptions = "o"
 -- Numbers
 o.number = true
 o.numberwidth = 1

@@ -1,5 +1,7 @@
 local lspconfig = require("lspconfig")
 local lsp = require("lsp-zero")
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 local handlers = {
 	-- The first entry (without a key) will be the default handler
 	-- and will be called for each installed server that doesn't have
@@ -19,6 +21,16 @@ local handlers = {
 					},
 				},
 			},
+		})
+	end,
+	["html"] = function()
+		lspconfig.html.setup({
+			capabilities = capabilities,
+		})
+	end,
+	["cssls"] = function()
+		lspconfig.cssls.setup({
+			capabilities = capabilities,
 		})
 	end,
 }
@@ -42,8 +54,8 @@ require("mason-lspconfig").setup({
 		"volar",
 		"dockerls",
 		"docker_compose_language_service",
-        "nginx_language_server",
-        "eslint"
+		"nginx_language_server",
+		"eslint",
 	},
 	automatic_installation = { exclude = {} },
 	handlers = handlers,
@@ -84,4 +96,3 @@ require("mason-tool-installer").setup({
 		"vint",
 	},
 })
-
