@@ -52,6 +52,8 @@ require("mason-lspconfig").setup({
 		"ts_ls",
 		"jsonls",
 		"volar",
+        "emmet_ls",
+        "emmet_language_server",
 		"dockerls",
 		"docker_compose_language_service",
 		"nginx_language_server",
