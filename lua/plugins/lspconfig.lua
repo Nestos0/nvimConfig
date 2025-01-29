@@ -36,7 +36,7 @@ return {
 				accept = {
 					-- experimental auto-brackets support
 					auto_brackets = {
-						enabled = true,
+						enabled = false,
 					},
 				},
 				menu = {
@@ -45,7 +45,7 @@ return {
 					},
 				},
 				documentation = {
-					auto_show = true,
+					auto_show = false,
 					auto_show_delay_ms = 200,
 				},
 				list = {
