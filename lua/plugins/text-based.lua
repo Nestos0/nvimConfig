@@ -35,6 +35,8 @@ return {
 					python = { "isort", "black" },
 					javascript = { "prettierd", "prettier" },
 					typescript = { "prettierd", "prettier" },
+					css = { "prettierd", "prettier" },
+					scss = { "prettierd", "prettier" },
 					typescriptreact = { "prettierd", "prettier", "biome" },
 					javascriptreact = { "prettierd", "prettier", "biome" },
 				},
