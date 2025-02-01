@@ -61,11 +61,9 @@ local sep = is_windows and "\\" or "/"
 local delim = is_windows and ";" or ":"
 vim.env.PATH = table.concat({ vim.fn.stdpath("data"), "mason", "bin" }, sep) .. delim .. vim.env.PATH
 
-vim.filetype.add({
-	pattern = {
-		["docker-compose%.yml"] = "yaml.docker-compose",
-		["docker-compose%.yaml"] = "yaml.docker-compose",
-		["compose%.yml"] = "yaml.docker-compose",
-		["compose%.yaml"] = "yaml.docker-compose",
-	},
+vim.api.nvim_create_autocmd("BufRead", {
+  pattern = { "docker-compose*.yml", "docker-compose*.yaml", "compose*.yml", "compose*.yaml" },
+  callback = function()
+    vim.bo.filetype = "yaml.docker-compose"
+  end,
 })
