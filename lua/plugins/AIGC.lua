@@ -1,11 +1,18 @@
 return {
 	{
-		"zbirenbaum/copilot.lua",
-		cmd = "Copilot",
-		event = "VeryLazy",
-		config = function()
-			require("copilot").setup({})
-		end,
+		'zbirenbaum/copilot.lua',
+		build = ':Copilot auth',
+		opts = {
+			suggestion = {
+				enabled = true,
+				debounce = 50,
+				auto_trigger = true,
+				keymap = {
+					accept = '<M-m>',
+				},
+			},
+			panel = { enabled = true },
+		},
 	},
 	{
 		-- support for image pasting
