@@ -135,3 +135,21 @@ if g.neovide then
 	-- g.neovide_font_hinting = 'none'
 	-- g.neovide_font_edging = 'subpixelantialias'
 end
+
+vim.diagnostic.config({
+  signs = {
+    active = true, -- 启用诊断标记
+    text = {
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN] = "",
+      [vim.diagnostic.severity.INFO] = "",
+      [vim.diagnostic.severity.HINT] = "",
+    },
+  },
+
+  underline = true,
+  virtual_text = {
+    prefix = "", -- 可以自定义前缀
+  },
+  update_in_insert = false,
+})

@@ -1,7 +1,7 @@
 return {
 
   { "nvimtools/none-ls.nvim", dependencies = "nvim-lua/plenary.nvim" },
-  "VonHeikemen/lsp-zero.nvim",
+  -- "VonHeikemen/lsp-zero.nvim",
   "rafamadriz/friendly-snippets",
   {
     "neovim/nvim-lspconfig",
@@ -25,6 +25,7 @@ return {
           cssls = {
             capabilities = capabilities,
           },
+          vtsls = {},
           html = {},
           jsonls = {},
         },
