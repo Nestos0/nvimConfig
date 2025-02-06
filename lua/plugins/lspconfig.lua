@@ -71,6 +71,7 @@ return {
       completion = {
 
         keyword = { range = "full" },
+        trigger = { show_on_trigger_character = true },
 
         -- Disable auto brackets
         -- NOTE: some LSPs may add auto brackets themselves anyway
@@ -79,9 +80,20 @@ return {
         -- Don't select by default, auto insert on selection
         list = { selection = { preselect = false, auto_insert = true } },
 
+        ghost_text = { enabled = true },
+
         menu = {
           -- Don't automatically show the completion menu
           auto_show = true,
+          winblend = 15,
+          border = "rounded",
+          scrollbar = false,
+          draw = {
+            columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind", gap = 1 } },
+            treesitter = {
+              "lsp",
+            },
+          },
         },
       },
       keymap = {
