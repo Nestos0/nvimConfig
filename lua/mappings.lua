@@ -72,8 +72,7 @@ nest.applyKeymaps({
 				{ "L", "gE", options = { desc = "Backward to next WORD end" } },
 				{ "u", "gk", options = { desc = "Move cursor up one display line" } },
 				{ "e", "gj", options = { desc = "Move cursor down one display line" } },
-
-			}
+			},
 		},
 	},
 }, {
@@ -83,17 +82,16 @@ nest.applyKeymaps({
 	options = { noremap = true, silent = true },
 })
 
-
 function HexToRGBA()
-  local hex = vim.fn.expand("<cword>") -- 获取光标下的单词
-  local r, g, b = hex:match("#?(%x%x)(%x%x)(%x%x)")
-  if r and g and b then
-    r, g, b = tonumber(r, 16), tonumber(g, 16), tonumber(b, 16)
-    vim.fn.setreg("+", string.format("rgba(%d, %d, %d, 1)", r, g, b)) -- 复制到剪贴板
-    print("Copied: rgba(" .. r .. ", " .. g .. ", " .. b .. ", 1)")
-  else
-    print("Not a valid hex color!")
-  end
+	local hex = vim.fn.expand("<cword>") -- 获取光标下的单词
+	local r, g, b = hex:match("#?(%x%x)(%x%x)(%x%x)")
+	if r and g and b then
+		r, g, b = tonumber(r, 16), tonumber(g, 16), tonumber(b, 16)
+		vim.fn.setreg("+", string.format("rgba(%d, %d, %d, 1)", r, g, b)) -- 复制到剪贴板
+		print("Copied: rgba(" .. r .. ", " .. g .. ", " .. b .. ", 1)")
+	else
+		print("Not a valid hex color!")
+	end
 end
 
 vim.api.nvim_set_keymap("n", "<leader>cr", ":lua HexToRGBA()<CR>", { noremap = true, silent = true })

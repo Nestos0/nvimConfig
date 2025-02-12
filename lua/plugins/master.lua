@@ -1,9 +1,9 @@
 return {
-	-- {
-	-- 	"undotest",
-	-- 	dev = true,
-	-- 	opts = {},
-	-- },
+	{
+		"pairtest.nvim",
+		dev = true,
+		-- opts = {},
+	},
 	{
 		"folke/trouble.nvim",
 		cmd = { "Trouble" },

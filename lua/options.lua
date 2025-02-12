@@ -5,7 +5,6 @@ local wo = vim.wo
 local api = vim.api
 
 -------------------------------------- options ------------------------------------------
-o.laststatus = 3
 o.showmode = false
 
 wo.scroll = 15
@@ -95,11 +94,11 @@ opt.wrap = true -- Line wrapping
 -- don't show the neovim dashboard
 opt.shortmess:append('I')
 
--- statusline
-opt.cmdheight = 0
-opt.laststatus = 3
-local str = string.rep('-', api.nvim_win_get_width(0))
-opt.statusline = str
+-- -- statusline
+-- opt.cmdheight = 0
+-- opt.laststatus = 3
+-- local str = string.rep('-', api.nvim_win_get_width(0))
+-- opt.statusline = str
 
 -- Default splitting will cause your main splits to jump when opening an edgebar.
 -- To prevent this, set `splitkeep` to either `screen` or `topline`.
