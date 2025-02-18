@@ -44,7 +44,7 @@ return {
       auto_suggestions_provider = "copilot", -- 使用 copilot 作为自动建议源
       openai = {
         endpoint = "https://api.deepseek.com/v1",
-        model = "deepseek-reasoner",
+        model = "deepseek-chat",
         timeout = 30000, -- Timeout in milliseconds
         temperature = 0,
         max_tokens = 4096,
