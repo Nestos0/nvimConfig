@@ -41,10 +41,7 @@ o.signcolumn = "yes"
 o.splitbelow = true
 o.splitright = true
 o.timeoutlen = 400
-o.undofile = true
 
--- interval for writing swap file to disk, also used by gitsigns
-o.updatetime = 250
 
 -- go to previous/next line with h,l,left arrow and right arrow
 -- when cursor reaches end/beginning of line
@@ -62,7 +59,7 @@ local sep = is_windows and "\\" or "/"
 local delim = is_windows and ";" or ":"
 vim.env.PATH = table.concat({ vim.fn.stdpath("data"), "mason", "bin" }, sep) .. delim .. vim.env.PATH
 
-vim.api.nvim_create_autocmd("BufRead", {
+api.nvim_create_autocmd("BufRead", {
   pattern = { "docker-compose*.yml", "docker-compose*.yaml", "compose*.yml", "compose*.yaml" },
   callback = function()
     vim.bo.filetype = "yaml.docker-compose"
@@ -77,15 +74,16 @@ opt.list = true -- Show some invisible characters (tabs...
 opt.pumblend = 0 -- Popup blend
 opt.pumheight = 10 -- Maximum number of entries in a popup
 opt.relativenumber = true -- Relative line numbers
-opt.shiftwidth = 2 -- Size of an indent
 opt.showmode = false -- We have a status line and modicator
 opt.signcolumn = 'yes' -- Always show the signcolumn, otherwise it would shift the text each time
 opt.smartcase = true -- Don't ignore case with capitals
 opt.smartindent = true -- Insert indents automatically
 opt.spelllang = { 'en' }
-opt.tabstop = 2 -- Number of spaces tabs count for
 opt.termguicolors = true -- True color support
 opt.undofile = true
+opt.swapfile = false        -- 禁用交换文件
+opt.backup = false          -- 禁用备份文件
+opt.writebackup = false     -- 禁用写入备份
 opt.undolevels = 10000
 opt.updatetime = 200 -- Save swap file and trigger CursorHold
 opt.virtualedit = 'block' -- Allow cursor to move where there is no text in visual block mode
