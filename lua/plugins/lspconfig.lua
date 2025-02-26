@@ -75,7 +75,7 @@ return {
 
         -- Disable auto brackets
         -- NOTE: some LSPs may add auto brackets themselves anyway
-        accept = { auto_brackets = { enabled = true } },
+        accept = { auto_brackets = { enabled = false } },
 
         -- Don't select by default, auto insert on selection
         list = { selection = { preselect = false, auto_insert = true } },
@@ -99,7 +99,14 @@ return {
       cmdline = {
         keymap = {
           ["<C-n>"] = { "show", "show_documentation", "hide_documentation" },
-          ["<CR>"] = { "accept", "fallback" },
+          ["<CR>"] = {
+            function(cmp)
+              if cmp.is_menu_visible() then
+                return cmp.accept()
+              end
+            end,
+            "fallback",
+          },
           ["<C-e>"] = { "hide", "fallback" },
 
           ["<Tab>"] = { "show", "select_next", "fallback" },
