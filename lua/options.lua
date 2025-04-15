@@ -101,6 +101,7 @@ opt.shortmess:append('I')
 -- Default splitting will cause your main splits to jump when opening an edgebar.
 -- To prevent this, set `splitkeep` to either `screen` or `topline`.
 opt.splitkeep = 'screen'
+opt.foldcolumn = "0"
 
 opt.list = true
 opt.listchars:append('space:⋅')
