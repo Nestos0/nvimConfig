@@ -28,6 +28,7 @@ return {
           vtsls = {},
           html = {},
           jsonls = {},
+          pyright = {}
         },
       }
       return opts
