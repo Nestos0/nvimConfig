@@ -98,7 +98,7 @@ return {
         handlers = {
           volar = function()
             require("lspconfig").volar.setup({
-              filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+              filetypes = { "vue" },
               init_options = {
                 vue = {
                   -- disable hybrid mode

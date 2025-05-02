@@ -1,5 +1,24 @@
 return {
-
+  {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = function()
+      local api = require("typescript-tools.api")
+      return {
+        handlers = {
+          ["textDocument/publishDiagnostics"] = api.filter_diagnostics(
+            -- Ignore 'This may be converted to an async function' diagnostics.
+            { 80001 }
+          ),
+        },
+        settings = {
+          tsserver_file_preferences = {
+            disableSuggestions = true,
+          },
+        },
+      }
+    end,
+  },
   { "nvimtools/none-ls.nvim", dependencies = "nvim-lua/plenary.nvim" },
   -- "VonHeikemen/lsp-zero.nvim",
   "rafamadriz/friendly-snippets",
@@ -11,6 +30,7 @@ return {
       capabilities.textDocument.completion.completionItem.snippetSupport = true
       local opts = {
         servers = {
+          sqlls = {},
           dockerls = {},
           lua_ls = {
             settings = {
@@ -25,10 +45,9 @@ return {
           cssls = {
             capabilities = capabilities,
           },
-          vtsls = {},
           html = {},
           jsonls = {},
-          pyright = {}
+          pyright = {},
         },
       }
       return opts
