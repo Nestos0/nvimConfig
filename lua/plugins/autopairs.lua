@@ -1,6 +1,7 @@
 return {
   {
     "windwp/nvim-autopairs",
+    lazy = true,
     event = { "InsertEnter" },
     config = function()
       local npairs = require("nvim-autopairs")
@@ -71,6 +72,7 @@ return {
   },
   {
     "altermo/ultimate-autopair.nvim",
+    lazy = true,
     event = { "InsertEnter", "CmdlineEnter" },
     opts = {
       --Config goes here

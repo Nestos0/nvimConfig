@@ -1,6 +1,8 @@
 return {
 	{
 		"folke/todo-comments.nvim",
+    lazy = true,
+    event = "User IceLoad",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {
 			-- your configuration comes here

@@ -3,6 +3,8 @@ local config = require("..config.statusline")
 return {
   {
     "nvim-lualine/lualine.nvim",
+    lazy = true,
+    event = "User IceLoad",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     init = function()
       vim.g.lualine_laststatus = vim.o.laststatus

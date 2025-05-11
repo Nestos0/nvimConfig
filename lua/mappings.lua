@@ -62,7 +62,6 @@ nest.applyKeymaps({
 				{ "V>", "<cmd>vsplit<CR>" },
 				{ "B>", "<cmd>split<CR>" },
 				{ "q>", "<cmd>bd | bp<CR>" },
-				{ "m>", "<cmd>Neotree toggle<CR>", options = { desc = "Toggle Neotree" } },
 			},
 		},
 		{

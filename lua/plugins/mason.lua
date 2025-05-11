@@ -25,7 +25,7 @@ return {
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     lazy = true,
-    cmd = "MasonToolInstall",
+    cmd = "MasonToolsInstall",
     config = function()
       require("mason-tool-installer").setup({
 
@@ -65,19 +65,18 @@ return {
     end,
   },
   {
-    "williamboman/mason.nvim",
-    lazy = true,
+    "mason-org/mason.nvim",
+    -- lazy = true,
+    event = "User IceLoad",
     cmd = "Mason",
-    opts ={
-        ensure_installed = { "hadolint", "eslint_d" },
-      }
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    priority = 1,
-    lazy = true,
-    cmd = "Mason",
-    config = function()
+    opts = {},
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "mason-org/mason-lspconfig.nvim",
+      "stevearc/dressing.nvim",
+    },
+    config = function(_, opts)
+      require("mason").setup(opts)
       require("mason-lspconfig").setup({
         ensure_installed = {
           "clangd",
@@ -98,7 +97,6 @@ return {
           "nginx_language_server",
           "eslint",
         },
-        automatic_installation = { exclude = {} },
         automatic_enable = {},
       })
     end,

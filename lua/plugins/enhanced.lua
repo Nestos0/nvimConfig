@@ -70,7 +70,9 @@ return {
       }
   },
   {
-    "numToStr/Comment.nvim",
+    "numToStr/Comment.nvim", 
+    lazy = true,
+    event = "User IceLoad",
     config = function()
       require("Comment").setup({
         ---Add a space b/w comment and the line

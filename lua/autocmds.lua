@@ -1,6 +1,23 @@
-vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
-  pattern = {"docker-compose*.yml", "docker-compose*.yaml"},
-  callback = function()
-    vim.bo.filetype = "yaml.docker-compose"
-  end,
+vim.api.nvim_create_autocmd("User", {
+    pattern = "IceStart",
+    once = true,
+    callback = function()
+        local function _trigger()
+            vim.api.nvim_exec_autocmds("User", { pattern = "IceLoad" })
+        end
+
+        if vim.bo.filetype == "snacks_dashboard" then
+            vim.api.nvim_create_autocmd("BufEnter", { pattern = "*/*", once = true, callback = _trigger })
+        else
+            _trigger()
+        end
+    end,
+})
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "VeryLazy",
+  once = true,
+  callback = function() 
+      vim.api.nvim_exec_autocmds("User", { pattern = "IceStart" })
+  end
 })

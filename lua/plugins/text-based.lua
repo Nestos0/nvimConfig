@@ -1,11 +1,15 @@
 return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
+    lazy = true,
+    ft = { "markdown", "Avante*" },
     opts = {},
     dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
   },
   {
     "chentoast/marks.nvim",
+    lazy = true,
+    event = "User IceLoad",
     config = function()
       require("marks").setup({
         default_mappings = true,
@@ -14,20 +18,29 @@ return {
   },
   {
     "ThePrimeagen/harpoon",
+    lazy = true,
+    event = "User IceLoad",
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" },
   },
   {
     "stevearc/conform.nvim",
+    lazy = true,
+    keys = {
+      {
+        "<leader>l",
+        function()
+          require("conform").format({
+            -- lsp_fallback = true,
+            async = true,
+            timeout_ms = 1000,
+          })
+        end,
+        desc = "Format file or range (in visual mode)",
+        mode = { "n", "v" }
+      },
+    },
     opts = function()
-      local conform = require("conform")
-      vim.keymap.set({ "n", "v" }, "<leader>l", function()
-        conform.format({
-          -- lsp_fallback = true,
-          async = true,
-          timeout_ms = 1000,
-        })
-      end, { desc = "Format file or range (in visual mode)" })
       local opts = {
         formatters_by_ft = {
           lua = { "stylua", lsp_format = "never" },
@@ -45,8 +58,8 @@ return {
           biome = { require_cwd = true },
         },
         default_format_opts = {
-          lsp_format = "never"
-        }
+          lsp_format = "never",
+        },
       }
       return opts
     end,

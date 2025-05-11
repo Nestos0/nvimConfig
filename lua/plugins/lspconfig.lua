@@ -2,7 +2,7 @@ return {
   {
     "pmizio/typescript-tools.nvim",
     lazy = true,
-    ft = { "typescript", "javascript" },
+    ft = { "typescript", "javascript", "vue" },
   -- enabled = false,
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     opts = function()
@@ -21,51 +21,16 @@ return {
       }
     end,
   },
-  { "nvimtools/none-ls.nvim", dependencies = "nvim-lua/plenary.nvim" },
+  -- { "nvimtools/none-ls.nvim", dependencies = "nvim-lua/plenary.nvim" },
   -- "VonHeikemen/lsp-zero.nvim",
   "rafamadriz/friendly-snippets",
   {
     "neovim/nvim-lspconfig",
-    priority = 100,
-    opts = function()
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities.textDocument.completion.completionItem.snippetSupport = true
-      local opts = {
-        servers = {
-          sqlls = {},
-          dockerls = {},
-          lua_ls = {
-            settings = {
-              Lua = {
-                diagnostics = {
-                  -- disable = { "undefined-field" },
-                  globals = { "vim" },
-                },
-              },
-            },
-          },
-          cssls = {
-            capabilities = capabilities,
-          },
-          html = {},
-          jsonls = {},
-          pyright = {},
-          volar = {
-              filetypes = { "vue" },
-              init_options = {
-                vue = {
-                  -- disable hybrid mode
-                  hybridMode = false,
-                },
-              },
-          }
-        },
-      }
-      return opts
-    end,
-    config = function(_, opts)
+    lazy = true,
+    event = { "InsertEnter", "CmdlineEnter", "User IceLoad" },
+    config = function()
       local lspconfig = require("lspconfig")
-      for server, config in pairs(opts.servers) do
+      for server, config in pairs(Lazy.lsp) do
         config.capabilities = require("blink.cmp").get_lsp_capabilities({
           textDocument = { completion = { completionItem = { snippetSupport = true } } },
         })
@@ -86,18 +51,19 @@ return {
   },
   { -- optional blink completion source for require statements and module annotations
     "saghen/blink.cmp",
+    lazy = true,
     build = "cargo build --release",
     dependencies = {
       "rafamadriz/friendly-snippets",
       -- add blink.compat to dependencies
-      -- {
-      --   "saghen/blink.compat",
-      --   opts = {},
-      --   lazy = true,
-      --   version = "*",
-      -- },
+      {
+        "saghen/blink.compat",
+        opts = {},
+        lazy = true,
+        version = "*",
+      },
     },
-    event = "VeryLazy",
+    event = { "InsertEnter", "CmdlineEnter", "User IceLoad" },
     opts = {
       completion = {
 

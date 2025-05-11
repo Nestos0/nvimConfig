@@ -19,7 +19,8 @@ return {
   {
     -- support for image pasting
     "HakonHarnes/img-clip.nvim",
-    event = "VeryLazy",
+    lazy = true,
+    event = "User IceLoad",
     opts = {
       -- recommended settings
       default = {
@@ -33,7 +34,6 @@ return {
       },
     },
   },
-  "stevearc/dressing.nvim",
   {
     "yetone/avante.nvim",
     lazy = true,
@@ -122,14 +122,6 @@ return {
             use_absolute_path = true,
           },
         },
-      },
-      {
-        -- Make sure to set this up properly if you have lazy=true
-        "MeanderingProgrammer/render-markdown.nvim",
-        opts = {
-          file_types = { "markdown", "Avante" },
-        },
-        ft = { "markdown", "Avante" },
       },
     },
   },

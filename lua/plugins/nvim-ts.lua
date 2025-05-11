@@ -1,6 +1,8 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = true,
+    event = "User IceLoad",
     build = ":TSUpdate",
     dependencies = {
       "posva/vim-vue",
@@ -47,6 +49,8 @@ return {
   },
   {
     "HiPhish/rainbow-delimiters.nvim",
+    lazy = true,
+    event = "User IceLoad",
   },
   {
     "JoosepAlviste/nvim-ts-context-commentstring",
@@ -57,6 +61,8 @@ return {
   },
   {
     "windwp/nvim-ts-autotag",
+    lazy = true,
+    ft = { "html", "vue", "xml" },
     config = function()
       ---@diagnostic disable-next-line: missing-fields
       require("nvim-ts-autotag").setup({
