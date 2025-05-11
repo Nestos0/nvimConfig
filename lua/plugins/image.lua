@@ -8,6 +8,8 @@ return {
     -- },
     {
         "3rd/image.nvim",
+        lazy = true,
+        ft = { "markdown", "Yazi" },
         dependencies = { "luarocks.nvim" },
         enabled = function ()
             return not vim.g.neovide

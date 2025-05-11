@@ -2,6 +2,8 @@ return {
   {
     "zbirenbaum/copilot.lua",
     build = ":Copilot auth",
+    lazy = true,
+    cmd = "Copilot",
     opts = {
       suggestion = {
         enabled = true,
@@ -34,8 +36,12 @@ return {
   "stevearc/dressing.nvim",
   {
     "yetone/avante.nvim",
-    event = "VeryLazy",
-    lazy = false,
+    lazy = true,
+    cmd = "AvanteAsk",
+    keys = {
+      { "<leader>aa",  function() require("avante.api").ask() end, desc = "avante: ask", silent = true, noremap = true, mode = { "n", "v" } },
+      { "<leader>an",  function() require("avante.api").ask({ new_chat = true }) end, desc = "avante: continue", silent = true, noremap = true, mode = { "n", "v" } },
+    },
     version = false, -- set this to "*" if you want to always pull the latest change, false to update on release
     opts = {
       -- add any opts here

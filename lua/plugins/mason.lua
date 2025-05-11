@@ -1,6 +1,7 @@
 return {
   {
     "jay-babu/mason-nvim-dap.nvim",
+    lazy = true,
     dependencies = "mason.nvim",
     cmd = { "DapInstall", "DapUninstall" },
     opts = {
@@ -23,6 +24,8 @@ return {
   },
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
+    lazy = true,
+    cmd = "MasonToolInstall",
     config = function()
       require("mason-tool-installer").setup({
 
@@ -63,15 +66,17 @@ return {
   },
   {
     "williamboman/mason.nvim",
-    config = function()
-      require("mason").setup({
+    lazy = true,
+    cmd = "Mason",
+    opts ={
         ensure_installed = { "hadolint", "eslint_d" },
-      })
-    end,
+      }
   },
   {
     "williamboman/mason-lspconfig.nvim",
     priority = 1,
+    lazy = true,
+    cmd = "Mason",
     config = function()
       require("mason-lspconfig").setup({
         ensure_installed = {
@@ -84,7 +89,6 @@ return {
           "jqls",
           "eslint",
           "pyright",
-          "ts_ls",
           "jsonls",
           "volar",
           "emmet_ls",
@@ -95,20 +99,7 @@ return {
           "eslint",
         },
         automatic_installation = { exclude = {} },
-        handlers = {
-          volar = function()
-            require("lspconfig").volar.setup({
-              filetypes = { "vue" },
-              init_options = {
-                vue = {
-                  -- disable hybrid mode
-                  hybridMode = false,
-                },
-              },
-            })
-          end,
-          ts_ls = function() end,
-        },
+        automatic_enable = {},
       })
     end,
   },

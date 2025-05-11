@@ -27,6 +27,7 @@ end
 return {
   {
     "mfussenegger/nvim-dap",
+    lazy = true,
     dependencies = {
       "rcarriga/nvim-dap-ui",
       -- virtual text for the debugger
@@ -90,6 +91,7 @@ return {
   },
   {
     "rcarriga/nvim-dap-ui",
+    lazy = true,
     dependencies = { "nvim-neotest/nvim-nio" },
     -- stylua: ignore
     keys = {
@@ -114,10 +116,12 @@ return {
   },
   {
     "theHamsta/nvim-dap-virtual-text",
+    lazy = true,
     opts = {},
   },
   {
     "jbyuki/one-small-step-for-vimkind",
+    lazy = true,
     -- stylua: ignore
     config = function()
       local dap = require("dap")

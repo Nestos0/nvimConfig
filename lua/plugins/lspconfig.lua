@@ -1,14 +1,16 @@
 return {
   {
     "pmizio/typescript-tools.nvim",
+    lazy = true,
+    ft = { "typescript", "javascript" },
+  -- enabled = false,
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     opts = function()
       local api = require("typescript-tools.api")
       return {
         handlers = {
           ["textDocument/publishDiagnostics"] = api.filter_diagnostics(
-            -- Ignore 'This may be converted to an async function' diagnostics.
-            { 80001 }
+            { 80001, 80006 }
           ),
         },
         settings = {
@@ -48,6 +50,15 @@ return {
           html = {},
           jsonls = {},
           pyright = {},
+          volar = {
+              filetypes = { "vue" },
+              init_options = {
+                vue = {
+                  -- disable hybrid mode
+                  hybridMode = false,
+                },
+              },
+          }
         },
       }
       return opts
