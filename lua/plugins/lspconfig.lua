@@ -26,8 +26,8 @@ return {
   "rafamadriz/friendly-snippets",
   {
     "neovim/nvim-lspconfig",
-    lazy = true,
-    event = { "InsertEnter", "CmdlineEnter", "User IceLoad" },
+    -- lazy = true,
+    -- event = { "InsertEnter", "CmdlineEnter", "User IceLoad" },
     config = function()
       local lspconfig = require("lspconfig")
       for server, config in pairs(Lazy.lsp) do

@@ -89,7 +89,7 @@ return {
           "eslint",
           "pyright",
           "jsonls",
-          "volar",
+          "vue_ls",
           "emmet_ls",
           "emmet_language_server",
           "dockerls",
