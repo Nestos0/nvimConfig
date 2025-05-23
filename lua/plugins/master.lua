@@ -1,4 +1,12 @@
 return {
+  {
+    "xemptuous/sqlua.nvim",
+    lazy = true,
+    cmd = "SQLua",
+    config = function()
+      require("sqlua").setup()
+    end,
+  },
   "nvim-lua/plenary.nvim",
   -- Used to define a keymap
   { "LionC/nest.nvim" },
@@ -23,7 +31,7 @@ return {
       {
         "<leader>?",
         function()
-          require("which-key").show({ global = false })
+          require("which-key").show({ global = true })
         end,
         desc = "Buffer Local Keymaps (which-key)",
       },
