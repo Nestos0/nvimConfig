@@ -49,8 +49,8 @@ return {
   },
   {
     "HiPhish/rainbow-delimiters.nvim",
-    -- lazy = true,
-    -- event = "User IceLoad",
+    lazy = true,
+    event = "User IceLoad",
     config = function()
       require("rainbow-delimiters.setup").setup({
         strategy = {
