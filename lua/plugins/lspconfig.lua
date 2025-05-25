@@ -3,15 +3,13 @@ return {
     "pmizio/typescript-tools.nvim",
     lazy = true,
     ft = { "typescript", "javascript", "vue" },
-  -- enabled = false,
+    -- enabled = false,
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     opts = function()
       local api = require("typescript-tools.api")
       return {
         handlers = {
-          ["textDocument/publishDiagnostics"] = api.filter_diagnostics(
-            { 80001, 80006 }
-          ),
+          ["textDocument/publishDiagnostics"] = api.filter_diagnostics({ 80001, 80006 }),
         },
         settings = {
           tsserver_file_preferences = {
@@ -55,6 +53,7 @@ return {
     build = "cargo build --release",
     dependencies = {
       "rafamadriz/friendly-snippets",
+      { 'xzbdmw/colorful-menu.nvim', opts = {} },
       -- add blink.compat to dependencies
       {
         "saghen/blink.compat",
@@ -89,6 +88,17 @@ return {
             columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind", gap = 1 } },
             treesitter = {
               "lsp",
+            },
+
+            components = {
+              label = {
+                text = function(ctx)
+                  return require("colorful-menu").blink_components_text(ctx)
+                end,
+                highlight = function(ctx)
+                  return require("colorful-menu").blink_components_highlight(ctx)
+                end,
+              },
             },
           },
         },
