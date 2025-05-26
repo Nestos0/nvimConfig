@@ -2,7 +2,6 @@ return {
   {
     "jay-babu/mason-nvim-dap.nvim",
     lazy = true,
-    dependencies = "mason.nvim",
     cmd = { "DapInstall", "DapUninstall" },
     opts = {
       -- Makes a best effort to setup the various debuggers with
@@ -66,7 +65,7 @@ return {
   },
   {
     "mason-org/mason.nvim",
-    -- lazy = true,
+    lazy = true,
     event = "User IceLoad",
     cmd = "Mason",
     opts = {},

@@ -38,7 +38,7 @@ return {
     "akinsho/bufferline.nvim",
     version = "*",
     dependencies = "nvim-tree/nvim-web-devicons",
-    event = "BufAdd",
+    event = "User IceLoad",
     lazy = true,
     keys = {
       { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
@@ -64,9 +64,11 @@ return {
     opts = {
       options = {
         mode = "buffers",
+        disgnostics = "nvim_lsp",
         separator_style = "slant",
         numbers = "ordinal",
-        always_show_bufferline = false, -- Hide bufferline when only one buffer
+        always_show_bufferline = true, -- Hide bufferline when only one buffer
+        auto_toggle_bufferline = true,
         hover = {
           enabled = true,
           delay = 200,
@@ -78,7 +80,7 @@ return {
             text = "Neo-tree",
             highlight = "Directory",
             text_align = "center",
-            separator = true,
+            separator = false,
           },
         },
       },

@@ -72,8 +72,8 @@ return {
   },
   {
     "altermo/ultimate-autopair.nvim",
-    lazy = true,
-    event = { "InsertEnter", "CmdlineEnter" },
+    -- lazy = true,
+    -- event = { "InsertEnter", "CmdlineEnter" },
     opts = {
       --Config goes here
       fastwarp = {
@@ -83,7 +83,11 @@ return {
         cmap = "<A-k>",
         rcmap = "<A-K>",
       },
-      internal_pairs = {},
+      internal_pairs = {
+        { "[", "]", fly = true },
+        { "(", ")", fly = true },
+        { "{", "}", fly = true },
+      },
     },
   },
   {
