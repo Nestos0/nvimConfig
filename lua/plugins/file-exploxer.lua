@@ -82,7 +82,7 @@ M = {
         function()
           require("yazi").yazi()
         end,
-        { desc = "Open the file manager" },
+        desc = "Open the file manager" ,
       },
     },
     opts = {},

@@ -41,6 +41,7 @@ return {
     event = "User IceLoad",
     lazy = true,
     keys = {
+      { "<leader>b", "", desc = "Buffer" },
       { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
       { "<leader>bn", "<Cmd>BufferLinePick<CR>", desc = "Pick Buffer" },
       { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },

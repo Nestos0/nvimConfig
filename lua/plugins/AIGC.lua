@@ -21,6 +21,10 @@ return {
     "HakonHarnes/img-clip.nvim",
     lazy = true,
     event = "User IceLoad",
+    keys = {
+      -- suggested keymap
+      { "<leader>P", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
+    },
     opts = {
       -- recommended settings
       default = {
@@ -39,31 +43,51 @@ return {
     lazy = true,
     cmd = "AvanteAsk",
     keys = {
-      { "<leader>aa",  function() require("avante.api").ask() end, desc = "avante: ask", silent = true, noremap = true, mode = { "n", "v" } },
-      { "<leader>an",  function() require("avante.api").ask({ new_chat = true }) end, desc = "avante: continue", silent = true, noremap = true, mode = { "n", "v" } },
+      {
+        "<leader>aa",
+        function()
+          require("avante.api").ask()
+        end,
+        desc = "avante: ask",
+        silent = true,
+        noremap = true,
+        mode = { "n", "v" },
+      },
+      {
+        "<leader>an",
+        function()
+          require("avante.api").ask({ new_chat = true })
+        end,
+        desc = "avante: continue",
+        silent = true,
+        noremap = true,
+        mode = { "n", "v" },
+      },
     },
     version = false, -- set this to "*" if you want to always pull the latest change, false to update on release
     opts = {
       -- add any opts here
 
-      provider = "openai",
+      provider = "deepseek",
       auto_suggestions_provider = "copilot", -- 使用 copilot 作为自动建议源
-      openai = {
-        endpoint = "https://api.deepseek.com/v1",
-        model = "deepseek-chat",
-        timeout = 30000, -- Timeout in milliseconds
-        temperature = 0,
-        max_tokens = 4096,
-        -- optional
-        api_key_name = "OPENAI_API_KEY", -- default OPENAI_API_KEY if not set
-      },
       compat = {
         "avante_commands",
         "avante_mentions",
         "avante_files",
       },
       providers = {
-
+        deepseek = {
+          __inherited_from = "openai",
+          endpoint = "https://api.deepseek.com/",
+          model = "deepseek-coder",
+          timeout = 30000, -- Timeout in milliseconds
+          extra_request_body = {
+                    temperature = 0,
+          },
+          max_tokens = 4096,
+          -- optional
+          api_key_name = "OPENAI_API_KEY", -- default OPENAI_API_KEY if not set
+        },
         copilot = {
           name = "copilot",
           module = "avante.providers.copilot", -- 使用官方推荐的模块路径

@@ -1,6 +1,15 @@
 return {
-
   -- add this to your lua/plugins.lua, lua/plugins/init.lua,  or the file you keep your other plugins:
+  {
+    "smjonas/inc-rename.nvim",
+    opts = {},
+    config = function(_, opts)
+      vim.keymap.set("n", "<leader>rn", function()
+        return ":IncRename " .. vim.fn.expand("<cword>")
+      end, { expr = true })
+      require("inc_rename").setup(opts)
+    end,
+  },
   {
     "norcalli/nvim-colorizer.lua",
     event = "VeryLazy",
@@ -23,54 +32,54 @@ return {
     event = "VeryLazy",
     cmd = "Colortils",
     opts = {
-        -- Register in which color codes will be copied
-        register = "+",
-        -- Preview for colors, if it contains `%s` this will be replaced with a hex color code of the color
-        color_preview = "█ %s",
-        -- The default in which colors should be saved
-        -- This can be hex, hsl or rgb
-        default_format = "hex",
-        -- String: default color if no color is found
-        default_color = "#000000",
-        -- Border for the float
-        border = "rounded",
-        -- Some mappings which are used inside the tools
-        mappings = {
-          -- increment values
-          increment = "i",
-          -- decrement values
-          decrement = "n",
-          -- increment values with bigger steps
-          increment_big = "I",
-          -- decrement values with bigger steps
-          decrement_big = "N",
-          -- set values to the minimum
-          min_value = "0",
-          -- set values to the maximum
-          max_value = "$",
-          -- save the current color in the register specified above with the format specified above
-          set_register_default_format = "<cr>",
-          -- save the current color in the register specified above with a format you can choose
-          set_register_choose_format = "g<cr>",
-          -- replace the color under the cursor with the current color in the format specified above
-          replace_default_format = "<m-cr>",
-          -- replace the color under the cursor with the current color in a format you can choose
-          replace_choose_format = "g<m-cr>",
-          -- export the current color to a different tool
-          export = "E",
-          -- set the value to a certain number (done by just entering numbers)
-          set_value = "c",
-          -- toggle transparency
-          transparency = "T",
-          -- choose the background (for transparent colors)
-          choose_background = "B",
-          -- quit window
-          quit_window = { "q", "<esc>" },
-        },
-      }
+      -- Register in which color codes will be copied
+      register = "+",
+      -- Preview for colors, if it contains `%s` this will be replaced with a hex color code of the color
+      color_preview = "█ %s",
+      -- The default in which colors should be saved
+      -- This can be hex, hsl or rgb
+      default_format = "hex",
+      -- String: default color if no color is found
+      default_color = "#000000",
+      -- Border for the float
+      border = "rounded",
+      -- Some mappings which are used inside the tools
+      mappings = {
+        -- increment values
+        increment = "i",
+        -- decrement values
+        decrement = "n",
+        -- increment values with bigger steps
+        increment_big = "I",
+        -- decrement values with bigger steps
+        decrement_big = "N",
+        -- set values to the minimum
+        min_value = "0",
+        -- set values to the maximum
+        max_value = "$",
+        -- save the current color in the register specified above with the format specified above
+        set_register_default_format = "<cr>",
+        -- save the current color in the register specified above with a format you can choose
+        set_register_choose_format = "g<cr>",
+        -- replace the color under the cursor with the current color in the format specified above
+        replace_default_format = "<m-cr>",
+        -- replace the color under the cursor with the current color in a format you can choose
+        replace_choose_format = "g<m-cr>",
+        -- export the current color to a different tool
+        export = "E",
+        -- set the value to a certain number (done by just entering numbers)
+        set_value = "c",
+        -- toggle transparency
+        transparency = "T",
+        -- choose the background (for transparent colors)
+        choose_background = "B",
+        -- quit window
+        quit_window = { "q", "<esc>" },
+      },
+    },
   },
   {
-    "numToStr/Comment.nvim", 
+    "numToStr/Comment.nvim",
     lazy = true,
     event = "User IceLoad",
     config = function()
@@ -149,43 +158,43 @@ return {
             ["vim.lsp.util.stylize_markdown"] = true,
             ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
           },
-        hover = {
-          enabled = true,
-          silent = false, -- set to true to not show a message if hover is not available
-          view = nil, -- when nil, use defaults from documentation
-          ---@type NoiceViewOptions
-          opts = {}, -- merged with defaults from documentation
-        },
-        signature = {
-          enabled = false,
-          auto_open = {
-            enabled = false,
-            trigger = false, -- Automatically show signature help when typing a trigger character from the LSP
-            luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
-            throttle = 50, -- Debounce lsp signature help request by 50ms
+          hover = {
+            enabled = true,
+            silent = true, -- set to true to not show a message if hover is not available
+            view = nil, -- when nil, use defaults from documentation
+            ---@type NoiceViewOptions
+            opts = {}, -- merged with defaults from documentation
           },
-          view = nil, -- when nil, use defaults from documentation
-          ---@type NoiceViewOptions
-          opts = {}, -- merged with defaults from documentation
-        },
-        documentation = {
-          view = "hover",
-          ---@type NoiceViewOptions
-          opts = {
-            lang = "markdown",
-            replace = true,
-            render = "plain",
-            format = { "{message}" },
-            win_options = { concealcursor = "n", conceallevel = 3 },
+          signature = {
+            enabled = true,
+            auto_open = {
+              enabled = true,
+              trigger = false, -- Automatically show signature help when typing a trigger character from the LSP
+              luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
+              throttle = 50, -- Debounce lsp signature help request by 50ms
+            },
+            view = nil, -- when nil, use defaults from documentation
+            ---@type NoiceViewOptions
+            opts = {}, -- merged with defaults from documentation
           },
-        },
+          documentation = {
+            view = "hover",
+            ---@type NoiceViewOptions
+            opts = {
+              lang = "markdown",
+              replace = true,
+              render = "plain",
+              format = { "{message}" },
+              win_options = { concealcursor = "n", conceallevel = 3 },
+            },
+          },
         },
         -- you can enable a preset for easier configuration
         presets = {
           command_palette = true, -- position the cmdline and popupmenu together
           long_message_to_split = true, -- long messages will be sent to a split
-          inc_rename = false, -- enables an input dialog for inc-rename.nvim
-          lsp_doc_border = false, -- add a border to hover docs and signature help
+          inc_rename = true, -- enables an input dialog for inc-rename.nvim
+          lsp_doc_border = true, -- add a border to hover docs and signature help
         },
       },
   -- stylua: ignore

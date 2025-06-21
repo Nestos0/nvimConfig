@@ -95,6 +95,7 @@ return {
           "docker_compose_language_service",
           "nginx_language_server",
           "eslint",
+          "serve_d"
         },
         automatic_enable = {},
       })

@@ -7,23 +7,6 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
   },
   {
-    "chentoast/marks.nvim",
-    lazy = true,
-    event = "User IceLoad",
-    config = function()
-      require("marks").setup({
-        default_mappings = true,
-      })
-    end,
-  },
-  {
-    "ThePrimeagen/harpoon",
-    lazy = true,
-    event = "User IceLoad",
-    branch = "harpoon2",
-    dependencies = { "nvim-lua/plenary.nvim" },
-  },
-  {
     "stevearc/conform.nvim",
     lazy = true,
     keys = {
@@ -48,6 +31,7 @@ return {
           python = { "isort", "black" },
           javascript = { "prettierd", "prettier" },
           typescript = { "prettierd", "prettier" },
+          html = { "prettierd", "prettier" },
           vue = { "prettierd", "prettier" },
           css = { "prettierd", "prettier" },
           scss = { "prettierd", "prettier" },

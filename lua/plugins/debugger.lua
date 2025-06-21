@@ -28,6 +28,7 @@ return {
   {
     "mfussenegger/nvim-dap",
     lazy = true,
+    event = "User IceLoad",
     dependencies = {
       "rcarriga/nvim-dap-ui",
       -- virtual text for the debugger
@@ -89,6 +90,7 @@ return {
   {
     "rcarriga/nvim-dap-ui",
     lazy = true,
+    event = "User IceLoad",
     dependencies = { "nvim-neotest/nvim-nio" },
     -- stylua: ignore
     keys = {
@@ -114,11 +116,13 @@ return {
   {
     "theHamsta/nvim-dap-virtual-text",
     lazy = true,
+    event = "User IceLoad",
     opts = {},
   },
   {
     "jbyuki/one-small-step-for-vimkind",
     lazy = true,
+    event = "User IceLoad",
     -- stylua: ignore
     config = function()
       local dap = require("dap")
