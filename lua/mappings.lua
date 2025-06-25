@@ -99,6 +99,8 @@ nest.applyKeymaps({
   buffer = false,
   options = { noremap = true, silent = true },
 })
+vim.keymap.set("x", "p", [["_dP]], { noremap = true })
+vim.keymap.set("n", "xx", "dd", { noremap = true })
 
 function HexToRGBA()
   local hex = vim.fn.expand("<cword>") -- 获取光标下的单词
