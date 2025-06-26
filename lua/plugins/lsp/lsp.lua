@@ -88,7 +88,7 @@ lsp = {
       },
       vue = {
         -- disable hybrid mode
-        hybridMode = true,
+        hybridMode = false,
       },
     },
   },
