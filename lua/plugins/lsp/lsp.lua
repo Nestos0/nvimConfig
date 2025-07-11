@@ -24,7 +24,7 @@ lsp = {
   html = {},
   jsonls = {},
   pyright = {},
-  eslint = {},
+  -- eslint = {},
   clangd = {
     cmd = {
       "clangd",

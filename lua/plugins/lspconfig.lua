@@ -21,6 +21,8 @@ return {
   },
   {
     "luckasRanarison/tailwind-tools.nvim",
+    lazy = true,
+    ft= { "vue", "html", "css", "javascript" },
     name = "tailwind-tools",
     build = ":UpdateRemotePlugins",
     dependencies = {

@@ -48,7 +48,7 @@ return {
     end,
     keys = {
       { "<leader>tf", "<Cmd>Telescope find_files<CR>", desc = "find file", silent = true },
-      { "<leader>t<C-f>", "<Cmd>Telescope live_grep<CR>", desc = "live grep", silent = true },
+      { "<leader>tl", "<Cmd>Telescope live_grep<CR>", desc = "live grep", silent = true },
       { "<leader>tb", "<Cmd>Telescope buffers<CR>", desc = "manage buffers", silent = true },
       { "<leader>uu", "<Cmd>Telescope undo<CR>", desc = "Telescope undotree", silent = true },
     },
