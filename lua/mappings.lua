@@ -30,7 +30,6 @@ nest.applyKeymaps({
   {
     { "u", "<up>", options = { desc = "Up" } },
     { "n", "<left>", options = { desc = "Left" } },
-    { "i", "<right>", options = { desc = "Right" } },
     { "e", "<down>", options = { desc = "Down" } },
     { "j", "<undo>", options = { desc = "Undo" } },
     { "J", "<redo>", options = { desc = "Redo" } },
@@ -101,6 +100,7 @@ nest.applyKeymaps({
 })
 vim.keymap.set("x", "p", [["_dP]], { noremap = true })
 vim.keymap.set("n", "xx", "dd", { noremap = true })
+vim.keymap.set("n", "i", "<right>", {noremap = true, desc="inner"})
 
 function HexToRGBA()
   local hex = vim.fn.expand("<cword>") -- 获取光标下的单词

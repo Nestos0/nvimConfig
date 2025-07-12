@@ -8,6 +8,10 @@ return {
     opts = function()
       local api = require("typescript-tools.api")
       return {
+        on_attach = function(_, bufnr)
+          local opts = { buffer = bufnr, remap = false }
+          vim.keymap.set("n", "gd", "<cmd>TSToolsGoToSourceDefinition<CR>", opts)
+        end,
         handlers = {
           ["textDocument/publishDiagnostics"] = api.filter_diagnostics({ 80001, 80006 }),
         },
@@ -22,7 +26,7 @@ return {
   {
     "luckasRanarison/tailwind-tools.nvim",
     lazy = true,
-    ft= { "vue", "html", "css", "javascript" },
+    ft = { "vue", "html", "css", "javascript" },
     name = "tailwind-tools",
     build = ":UpdateRemotePlugins",
     dependencies = {
