@@ -6,7 +6,7 @@ return {
       "debugloop/telescope-undo.nvim",
       {
         "nvim-telescope/telescope-fzf-native.nvim",
-        build = "make"
+        build = "make",
       },
     },
     -- ensure that other plugins that use telescope can function properly
@@ -48,9 +48,38 @@ return {
     end,
     keys = {
       { "<leader>tf", "<Cmd>Telescope find_files<CR>", desc = "find file", silent = true },
-      { "<leader>tl", "<Cmd>Telescope live_grep<CR>", desc = "live grep", silent = true },
+      {
+        "<leader>tF",
+        function()
+          require("telescope.builtin").live_grep({
+            layout_strategy = "vertical",
+          })
+        end,
+        desc = "live grep",
+        silent = true,
+      },
       { "<leader>tb", "<Cmd>Telescope buffers<CR>", desc = "manage buffers", silent = true },
       { "<leader>uu", "<Cmd>Telescope undo<CR>", desc = "Telescope undotree", silent = true },
+      {
+        "<leader>ps",
+        function()
+          require("telescope.builtin").grep_string({
+            search = vim.fn.input("Grep > "),
+            use_regex = true,
+            layout_strategy = "vertical",
+          })
+        end,
+      },
+      {
+        "<leader>o",
+        function()
+          require("telescope.builtin").live_grep({
+            grep_open_files = true,
+            layout_strategy = "vertical",
+          })
+        end,
+        desc = "Search in open files",
+      },
     },
   },
 }
