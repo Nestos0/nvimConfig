@@ -1,5 +1,5 @@
 local nest = require("nest")
-require("plugins.local.visual_i").setup()
+-- require("plugins.local.visual_i").setup()
 
 nest.applyKeymaps({
   {
@@ -35,7 +35,7 @@ nest.applyKeymaps({
     { "e", "<down>", options = { desc = "Down" } },
     { "j", "<undo>", options = { desc = "Undo" } },
     { "J", "<redo>", options = { desc = "Redo" } },
-    { "w", "<Insert>", options = { desc = "Insert" } },
+    { "w", "i", options = { desc = "Insert" } },
     { "l", "w", options = { desc = "Forward to next word" } },
     { "h", "n", options = { desc = "Repeat latest find" } },
     { "k", "e", options = { desc = "Forward to next word end" } },

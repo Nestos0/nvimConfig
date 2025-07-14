@@ -33,7 +33,7 @@ return {
 
         menu = {
           -- Don't automatically show the completion menu
-          auto_show = true,
+          auto_show = false,
           winblend = 15,
           border = "rounded",
           scrollbar = false,
