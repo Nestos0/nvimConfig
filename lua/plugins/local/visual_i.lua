@@ -1,20 +1,22 @@
 local M = {}
 
 local next_key = nil
-
--- local listener = vim.on_key(function(key)
---     vim.notify(key)
--- end)
+local last_key
 
 local function setup_visual_mapping()
   vim.keymap.set("x", "i", "i", { noremap = true })
   next_key = vim.fn.getcharstr()
 
   if next_key == "i" then
-    vim.api.nvim_input("i")
+    last_key = next_key
+    next_key = vim.fn.getcharstr()
+    if next_key == "i" then
+      last_key = ""
+      next_key = "<right>"
+    end
+    vim.api.nvim_input(last_key .. next_key)
     vim.schedule(function()
       vim.keymap.set("x", "i", "l", { noremap = true })
-      vim.api.nvim_input("i")
     end)
   else
     vim.keymap.set("x", "i", "l", { noremap = true })
