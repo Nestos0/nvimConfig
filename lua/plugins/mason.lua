@@ -88,7 +88,6 @@ return {
           "eslint",
           "pyright",
           "jsonls",
-          "vue_ls",
           "emmet_ls",
           "emmet_language_server",
           "dockerls",
