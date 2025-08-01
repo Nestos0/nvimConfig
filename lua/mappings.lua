@@ -29,18 +29,16 @@ nest.applyKeymaps({
     },
   },
   {
-    { "u", "<up>", options = { desc = "Up" } },
+    { "u", "k", options = { desc = "Up" } },
     { "n", "<left>", options = { desc = "Left" } },
-    { "i", "<right>", options = { desc = "inner" }},
-    { "e", "<down>", options = { desc = "Down" } },
+    { "i", "<right>", options = { desc = "Right", nowait = true }},
+    { "e", "j", options = { desc = "Down" } },
     { "j", "<undo>", options = { desc = "Undo" } },
     { "J", "<redo>", options = { desc = "Redo" } },
     { "w", "i", options = { desc = "Insert" } },
     { "l", "w", options = { desc = "Forward to next word" } },
     { "h", "n", options = { desc = "Repeat latest find" } },
     { "k", "e", options = { desc = "Forward to next word end" } },
-    { "d", '"_d', options = { desc = "Delete" } },
-    { "c", '"_c', options = { desc = "Change" } },
     {
       "<S-",
       {
@@ -95,7 +93,7 @@ nest.applyKeymaps({
     },
   },
 }, {
-  mode = "nx",
+  mode = "nxo",
   prefix = "",
   buffer = false,
   options = { noremap = true, silent = true },

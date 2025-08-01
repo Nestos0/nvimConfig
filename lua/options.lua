@@ -10,7 +10,7 @@ o.showmode = false
 wo.scroll = 15
 
 o.completeopt = 'menu,menuone,preview'
-o.clipboard = "unnamedplus"
+o.clipboard = "unnamed"
 o.cursorline = true
 o.cursorlineopt = "number"
 
