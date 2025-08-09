@@ -7,7 +7,7 @@ lsp = {
       Lua = {
         diagnostics = {
           -- disable = { "undefined-field" },
-          globals = { "vim" },
+          globals = { "vim", "love" },
         },
       },
     },
@@ -43,7 +43,7 @@ lsp = {
       vim.keymap.set("n", "gd", function()
         vim.lsp.buf.definition()
       end, opts)
-      vim.keymap.set("n", "K", function()
+      vim.keymap.set("n", "<C-n>", function()
         vim.lsp.buf.hover()
       end, opts)
       vim.keymap.set("n", "<leader>vws", function()

@@ -27,6 +27,7 @@ return {
       local opts = {
         formatters_by_ft = {
           lua = { "stylua", lsp_format = "never" },
+          c = { "clang-format" },
           -- Conform will run multiple formatters sequentially
           python = { "isort", "black" },
           javascript = { "prettierd", "prettier" },
