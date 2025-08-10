@@ -38,6 +38,7 @@ return {
           scss = { "prettierd", "prettier" },
           typescriptreact = { "prettierd", "prettier", "biome" },
           javascriptreact = { "prettierd", "prettier", "biome" },
+          json = { "jq" }
         },
         formatters = {
           biome = { require_cwd = true },
