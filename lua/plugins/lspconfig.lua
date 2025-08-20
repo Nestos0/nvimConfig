@@ -53,6 +53,35 @@ return {
     end,
   },
   {
+    "MysticalDevil/inlay-hints.nvim",
+    event = "LspAttach",
+    dependencies = { "neovim/nvim-lspconfig" },
+    config = function()
+      require("inlay-hints").setup()
+    end,
+  },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "BufRead",
+    config = function()
+      require("lsp_signature").setup({
+        bind = true,
+        handler_opts = {
+          border = "rounded",
+        },
+        hint_enable = true,
+        hint_prefix = "📌 ",
+        hint_scheme = "String",
+        floating_window = true,
+        floating_window_above_cur_line = true,
+        fix_pos = false,
+        toggle_key = "<M-s>",
+        select_signature_key = "<M-n>",
+        transparency = 20,
+      })
+    end,
+  },
+  {
     "folke/lazydev.nvim",
     ft = "lua", -- only load on lua files
     opts = {
