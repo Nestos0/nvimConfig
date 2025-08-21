@@ -11,7 +11,7 @@ return {
     }
 
     lint.linters.cpplint.args = {
-      "--filter=-legal/copyright",
+      "--filter=-build/class,-build/namespaces,-build/include_order,-whitespace/indent,-whitespace/parens,-whitespace/braces,-readability/namespace,-readability/function,-readability/nolint,-legal/copyright",
     }
 
     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
