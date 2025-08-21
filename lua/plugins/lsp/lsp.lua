@@ -29,7 +29,7 @@ lsp = {
     cmd = {
       "clangd",
       "--background-index",
-      "--fallback-style=LLVM",
+      "--fallback-style=GNU",
       "--all-scopes-completion",
       "--clang-tidy",
       "--completion-style=detailed",

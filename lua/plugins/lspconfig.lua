@@ -44,11 +44,15 @@ return {
     -- event = { "InsertEnter", "CmdlineEnter", "User IceLoad" },
     config = function()
       local lspconfig = require("lspconfig")
-      for server, config in pairs(Lazy.lsp) do
-        config.capabilities = require("blink.cmp").get_lsp_capabilities({
-          textDocument = { completion = { completionItem = { snippetSupport = true } } },
-        })
-        lspconfig[server].setup(config)
+      if vim.g.vscode then
+        return 0
+      else
+        for server, config in pairs(Lazy.lsp) do
+          config.capabilities = require("blink.cmp").get_lsp_capabilities({
+            textDocument = { completion = { completionItem = { snippetSupport = true } } },
+          })
+          lspconfig[server].setup(config)
+        end
       end
     end,
   },
