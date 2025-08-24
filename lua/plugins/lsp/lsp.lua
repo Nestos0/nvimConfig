@@ -30,6 +30,7 @@ lsp = {
       "clangd",
       "--background-index",
       "--fallback-style=GNU",
+      "--compile-commands-dir=build",
       "--all-scopes-completion",
       "--clang-tidy",
       "--completion-style=detailed",
