@@ -1,4 +1,5 @@
 Lazy = {}
+require("cformat")
 require("plugins.lsp.lsp")
 require("config.lazy")
 require("config.colorscheme")
