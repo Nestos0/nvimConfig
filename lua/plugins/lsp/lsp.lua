@@ -24,8 +24,18 @@ lsp = {
   html = {},
   jsonls = {},
   pyright = {},
-  -- eslint = {},
   clangd = {
+    settings = {
+      clangd = {
+        InlayHints = {
+          Designators = false,
+          Enabled = false,
+          ParameterNames = false,
+          DeducedTypes = false,
+        },
+        fallbackFlags = { "-std=c++20" },
+      },
+    },
     cmd = {
       "clangd",
       "--background-index",

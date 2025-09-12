@@ -20,7 +20,7 @@ return {
           })
         end,
         desc = "Format file or range (in visual mode)",
-        mode = { "n", "v" }
+        mode = { "n", "v" },
       },
     },
     opts = function()
@@ -39,10 +39,13 @@ return {
           scss = { "prettierd", "prettier" },
           typescriptreact = { "prettierd", "prettier", "biome" },
           javascriptreact = { "prettierd", "prettier", "biome" },
-          json = { "jq" }
+          json = { "jq" },
         },
         formatters = {
           biome = { require_cwd = true },
+          clang_format = {
+            prepend_args = { "--style={BasedOnStyle: GNU, IndentWidth: 4}" },
+          },
         },
         default_format_opts = {
           lsp_format = "never",

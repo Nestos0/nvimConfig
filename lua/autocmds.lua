@@ -36,7 +36,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
-vim.api.nvim_create_augroup('IrreplaceableWindows', { clear = true })
+vim.api.nvim_create_augroup("IrreplaceableWindows", { clear = true })
 
 vim.api.nvim_create_autocmd("BufWinEnter", {
   group = "IrreplaceableWindows",
@@ -47,5 +47,17 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
     if vim.tbl_contains(buftypes, vim.bo.buftype) and vim.tbl_contains(filetypes, vim.bo.filetype) then
       vim.cmd("set winfixbuf")
     end
+  end,
+})
+
+vim.api.nvim_create_autocmd("InsertEnter", {
+  callback = function()
+    vim.lsp.inlay_hint.enable(false)
+  end,
+})
+
+vim.api.nvim_create_autocmd("InsertLeave", {
+  callback = function()
+    vim.lsp.inlay_hint.enable(true)
   end,
 })
