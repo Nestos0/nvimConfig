@@ -26,10 +26,3 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.cmd("match ErrorMsg /\\%>79v.\\+/")
   end,
 })
-
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = { "*.c", "*.h", "*.cpp", "*.hpp" },
-  callback = function()
-    vim.cmd("silent! normal! gg=G")
-  end,
-})
