@@ -1,95 +1,108 @@
 local nest = require("nest")
--- require("plugins.local.visual_i").setup()
+
+local function HexToRGBA()
+  local hex = vim.fn.expand("<cword>")
+  local r, g, b = hex:match("#?(%x%x)(%x%x)(%x%x)")
+  if r and g and b then
+    r, g, b = tonumber(r, 16), tonumber(g, 16), tonumber(b, 16)
+    vim.fn.setreg("+", string.format("rgba(%d, %d, %d, 1)", r, g, b))
+    print("Copied: rgba(" .. r .. ", " .. g .. ", " .. b .. ", 1)")
+  else
+    print("Not a valid hex color!")
+  end
+end
+
+vim.keymap.set("n", "<leader>cr", HexToRGBA, { noremap = true, silent = true, desc = "Convert hex to RGBA" })
 
 nest.applyKeymaps({
+
   {
     "<leader>",
     {
-      {
-        "d",
-        "",
-        options = { desc = "Dap" },
-      },
-      {
-        "u",
-        "",
-        options = { desc = "Undo" },
-      },
+      { "d", "", desc = "Dap" },
+      { "u", "", desc = "Undo" },
       {
         "s",
         {
-          { "", "", options = { desc = "Sort OR Noice" } },
+          { "", "", desc = "Sort OR Noice" },
           {
             "a",
             '<cmd>!wl-paste | fold -w1 | sort | paste -sd "" | paste -sd "" | tr -d \'\\n\' | wl-copy<CR><CR>',
-            options = { silent = true, desc = "Sort copied by alphabet" },
+            silent = true,
+            desc = "Sort copied by alphabet",
           },
         },
       },
     },
   },
+
+  { "u", "k", desc = "Up" },
+  { "n", "<left>", desc = "Left" },
+  { "i", "<right>", desc = "Right", nowait = true },
+  { "e", "j", desc = "Down" },
+
+  { "j", "<undo>", desc = "Undo" },
+  { "J", "<redo>", desc = "Redo" },
+
+  { "w", "i", desc = "Insert" },
+  { "l", "w", desc = "Forward to next word" },
+  { "h", "n", desc = "Repeat latest find" },
+  { "k", "e", desc = "Forward to next word end" },
+
   {
-    { "u", "k", options = { desc = "Up" } },
-    { "n", "<left>", options = { desc = "Left" } },
-    { "i", "<right>", options = { desc = "Right", nowait = true }},
-    { "e", "j", options = { desc = "Down" } },
-    { "j", "<undo>", options = { desc = "Undo" } },
-    { "J", "<redo>", options = { desc = "Redo" } },
-    { "w", "i", options = { desc = "Insert" } },
-    { "l", "w", options = { desc = "Forward to next word" } },
-    { "h", "n", options = { desc = "Repeat latest find" } },
-    { "k", "e", options = { desc = "Forward to next word end" } },
+    "<S-",
     {
-      "<S-",
-      {
-        { "u>", "<C-U>", options = { desc = "Scroll Up" } },
-        { "e>", "<C-D>", options = { desc = "Scroll Down" } },
-        { "w>", "I", options = { desc = "Insert start" } },
-        { "l>", "W", options = { desc = "Forward to next WORD" } },
-        { "n>", "^", options = { desc = "Cursor to Begin of line" } },
-        { "i>", "$", options = { desc = "Cursor to End of line" } },
-        { "h>", "N", options = { desc = "Repeat latest find(opposite)" } },
-        { "k>", "E", options = { desc = "Forward to next WORD end" } },
-      },
+      { "u>", "<C-U>", desc = "Scroll Up" },
+      { "e>", "<C-D>", desc = "Scroll Down" },
+      { "w>", "I", desc = "Insert start" },
+      { "l>", "W", desc = "Forward to next WORD" },
+      { "n>", "^", desc = "Cursor to Begin of line" },
+      { "i>", "$", desc = "Cursor to End of line" },
+      { "h>", "N", desc = "Repeat latest find (opposite)" },
+      { "k>", "E", desc = "Forward to next WORD end" },
     },
+  },
+
+  {
+    "<C-",
     {
-      "<C-",
-      {
-        { "-u>", "<C-y>" },
-        { "-f>", "<Pageup>" },
-        { "-b>", "<Pagedown>" },
-        { "-LeftMouse>", "<Nop>" },
-      },
+      { "-u>", "<C-y>", desc = "Scroll Up (line)" },
+      { "-f>", "<PageUp>", desc = "Page Up" },
+      { "-b>", "<PageDown>", desc = "Page Down" },
+      { "-LeftMouse>", "<Nop>", desc = "Disable Left Mouse" },
     },
+  },
+
+  {
+    "<C-w>",
     {
-      "<C-w>",
-      {
-        { "n", "<C-w><left>" },
-        { "i", "<C-w><right>" },
-        { "e", "<C-w><down>" },
-        { "u", "<C-w><up>" },
-        { "N", "<C-w>H" },
-        { "I", "<C-w>L" },
-        { "E", "<C-w>J" },
-        { "U", "<C-w>K" },
-      },
+      { "n", "<C-w><left>", desc = "Window left" },
+      { "i", "<C-w><right>", desc = "Window right" },
+      { "e", "<C-w><down>", desc = "Window down" },
+      { "u", "<C-w><up>", desc = "Window up" },
+      { "N", "<C-w>H", desc = "Window left (full)" },
+      { "I", "<C-w>L", desc = "Window right (full)" },
+      { "E", "<C-w>J", desc = "Window down (full)" },
+      { "U", "<C-w>K", desc = "Window up (full)" },
     },
+  },
+
+  {
+    "<A-",
     {
-      "<A-",
-      {
-        { "V>", "<cmd>vsplit<CR>" },
-        { "B>", "<cmd>split<CR>" },
-        { "q>", "<cmd>bd | bp<CR>" },
-      },
+      { "V>", "<cmd>vsplit<CR>", desc = "Vertical split" },
+      { "B>", "<cmd>split<CR>", desc = "Horizontal split" },
+      { "q>", "<cmd>bd | bp<CR>", desc = "Close buffer and previous" },
     },
+  },
+
+  {
+    "g",
     {
-      "g",
-      {
-        { "l", "ge", options = { desc = "Backward to next word end" } },
-        { "L", "gE", options = { desc = "Backward to next WORD end" } },
-        { "u", "gk", options = { desc = "Move cursor up one display line" } },
-        { "e", "gj", options = { desc = "Move cursor down one display line" } },
-      },
+      { "l", "ge", desc = "Backward to next word end" },
+      { "L", "gE", desc = "Backward to next WORD end" },
+      { "u", "gk", desc = "Move cursor up one display line" },
+      { "e", "gj", desc = "Move cursor down one display line" },
     },
   },
 }, {
@@ -98,19 +111,7 @@ nest.applyKeymaps({
   buffer = false,
   options = { noremap = true, silent = true },
 })
-vim.keymap.set("x", "p", [["_dP]], { noremap = true })
-vim.keymap.set("n", "xx", "dd", { noremap = true })
 
-function HexToRGBA()
-  local hex = vim.fn.expand("<cword>") -- 获取光标下的单词
-  local r, g, b = hex:match("#?(%x%x)(%x%x)(%x%x)")
-  if r and g and b then
-    r, g, b = tonumber(r, 16), tonumber(g, 16), tonumber(b, 16)
-    vim.fn.setreg("+", string.format("rgba(%d, %d, %d, 1)", r, g, b)) -- 复制到剪贴板
-    print("Copied: rgba(" .. r .. ", " .. g .. ", " .. b .. ", 1)")
-  else
-    print("Not a valid hex color!")
-  end
-end
+vim.keymap.set("x", "p", [["_dP]], { noremap = true, desc = "Paste without yank" })
 
-vim.api.nvim_set_keymap("n", "<leader>cr", ":lua HexToRGBA()<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "xx", "dd", { noremap = true, desc = "Delete line" })
