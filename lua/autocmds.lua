@@ -61,3 +61,22 @@ vim.api.nvim_create_autocmd("InsertLeave", {
     vim.lsp.inlay_hint.enable(true)
   end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "text", "markdown" },
+  callback = function()
+    vim.wo.list = false -- 禁用当前窗口的 list（制表符/空格可视化）
+    vim.schedule(function()
+          if Snacks and Snacks.indent and Snacks.indent.disable then
+            Snacks.indent.disable()
+          end
+        end)
+      end,
+})
+-- vim.api.nvim_create_autocmd("BufReadPost", {
+--   group = list_disable_group,
+--   pattern = { "*.org" },
+--   callback = function()
+--     vim.wo.list = false
+--   end,
+-- })
