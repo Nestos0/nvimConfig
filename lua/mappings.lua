@@ -14,6 +14,8 @@ end
 
 vim.keymap.set("n", "<leader>cr", HexToRGBA, { noremap = true, silent = true, desc = "Convert hex to RGBA" })
 
+vim.keymap.set("n", "<C-W><C-N>", "")
+
 nest.applyKeymaps({
 
   {
