@@ -87,7 +87,7 @@ opt.writebackup = false     -- 禁用写入备份
 opt.undolevels = 10000
 opt.updatetime = 200 -- Save swap file and trigger CursorHold
 opt.virtualedit = 'block' -- Allow cursor to move where there is no text in visual block mode
-opt.wrap = true -- Line wrapping
+opt.wrap = false -- Line wrapping
 
 -- don't show the neovim dashboard
 opt.shortmess:append('I')

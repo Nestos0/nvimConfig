@@ -12,6 +12,7 @@ local function HexToRGBA()
   end
 end
 
+vim.keymap.del("x", "in")
 vim.keymap.set("n", "<leader>cr", HexToRGBA, { noremap = true, silent = true, desc = "Convert hex to RGBA" })
 
 vim.keymap.set("n", "<C-W><C-N>", "")
@@ -103,8 +104,8 @@ nest.applyKeymaps({
     {
       { "l", "ge", desc = "Backward to next word end" },
       { "L", "gE", desc = "Backward to next WORD end" },
-      { "u", "gk", desc = "Move cursor up one display line" },
-      { "e", "gj", desc = "Move cursor down one display line" },
+      -- { "u", "gk", desc = "Move cursor up one display line" },
+      -- { "e", "gj", desc = "Move cursor down one display line" },
     },
   },
 }, {
@@ -117,3 +118,5 @@ nest.applyKeymaps({
 vim.keymap.set("x", "p", [["_dP]], { noremap = true, desc = "Paste without yank" })
 
 vim.keymap.set("n", "xx", "dd", { noremap = true, desc = "Delete line" })
+
+vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", { noremap = true, desc = "Show Defineitions" })
