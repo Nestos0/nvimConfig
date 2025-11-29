@@ -117,6 +117,4 @@ nest.applyKeymaps({
 
 vim.keymap.set("x", "p", [["_dP]], { noremap = true, desc = "Paste without yank" })
 
-vim.keymap.set("n", "xx", "dd", { noremap = true, desc = "Delete line" })
-
 vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", { noremap = true, desc = "Show Defineitions" })
