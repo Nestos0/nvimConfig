@@ -60,33 +60,33 @@ return {
     "MysticalDevil/inlay-hints.nvim",
     event = "LspAttach",
     dependencies = { "neovim/nvim-lspconfig" },
-    config = function()
-      require("inlay-hints").setup()
-    end,
+    -- config = function()
+    --   require("inlay-hints").setup()
+    -- end,
   },
   {
     "p00f/clangd_extensions.nvim",
     config = function()
       require("clangd_extensions").setup({
         ast = {
-            role_icons = {
-                type = "",
-                declaration = "",
-                expression = "",
-                specifier = "",
-                statement = "",
-                ["template argument"] = "",
-            },
+          role_icons = {
+            type = "",
+            declaration = "",
+            expression = "",
+            specifier = "",
+            statement = "",
+            ["template argument"] = "",
+          },
 
-            kind_icons = {
-                Compound = "",
-                Recovery = "",
-                TranslationUnit = "",
-                PackExpansion = "",
-                TemplateTypeParm = "",
-                TemplateTemplateParm = "",
-                TemplateParamObject = "",
-            },
+          kind_icons = {
+            Compound = "",
+            Recovery = "",
+            TranslationUnit = "",
+            PackExpansion = "",
+            TemplateTypeParm = "",
+            TemplateTemplateParm = "",
+            TemplateParamObject = "",
+          },
 
           highlights = {
             detail = "Comment",
@@ -100,6 +100,18 @@ return {
         },
       })
     end,
+  },
+  -- using lazy.nvim
+  {
+    "S1M0N38/love2d.nvim",
+    event = "VeryLazy",
+    version = "2.*",
+    opts = {},
+    keys = {
+      { "<leader>v", ft = "lua", desc = "LÖVE" },
+      { "<leader>vv", "<cmd>LoveRun<cr>", ft = "lua", desc = "Run LÖVE" },
+      { "<leader>vs", "<cmd>LoveStop<cr>", ft = "lua", desc = "Stop LÖVE" },
+    },
   },
   {
     "ray-x/lsp_signature.nvim",

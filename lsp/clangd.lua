@@ -48,11 +48,10 @@ return {
   settings = {
     clangd = {
       InlayHints = {
-        Enabled = true,
+        Enabled = false,
         ParameterNames = true,
         DeducedTypes = true,
       },
-      fallbackFlags = { "-std=c++20" },
     },
   },
 }

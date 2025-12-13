@@ -5,7 +5,7 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt.tabstop = 8
     vim.opt.shiftwidth = 2
     vim.opt.softtabstop = 2
-    vim.opt.textwidth = 79
+    vim.opt.textwidth = 100
     vim.opt.formatoptions = "croql"
     vim.opt_local.cinoptions = {
       ">2s",
@@ -22,7 +22,5 @@ vim.api.nvim_create_autocmd("FileType", {
       "t0",
       "(0"
     }
-
-    vim.cmd("match ErrorMsg /\\%>79v.\\+/")
   end,
 })
