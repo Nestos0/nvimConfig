@@ -36,26 +36,7 @@ return {
     },
     opts = {}, -- your configuration
   },
-  -- "VonHeikemen/lsp-zero.nvim",
   "rafamadriz/friendly-snippets",
-  -- {
-  --   "neovim/nvim-lspconfig",
-  --   -- lazy = true,
-  --   -- event = { "InsertEnter", "CmdlineEnter", "User IceLoad" },
-  --   config = function()
-  --     local lspconfig = require("lspconfig")
-  --     if vim.g.vscode then
-  --       return 0
-  --     else
-  --       for server, config in pairs(Lazy.lsp) do
-  --         config.capabilities = require("blink.cmp").get_lsp_capabilities({
-  --           textDocument = { completion = { completionItem = { snippetSupport = true } } },
-  --         })
-  --         lspconfig[server].setup(config)
-  --       end
-  --     end
-  --   end,
-  -- },
   {
     "MysticalDevil/inlay-hints.nvim",
     event = "LspAttach",
@@ -286,30 +267,30 @@ return {
       return opts
     end,
   },
-{
-  "mfussenegger/nvim-lint",
-  lazy = true,
-  event = { "bufreadpre", "bufnewfile" }, -- to disable, comment this out
-  config = function()
-    local lint = require("lint")
+  {
+    "mfussenegger/nvim-lint",
+    lazy = true,
+    event = { "bufreadpre", "bufnewfile" }, -- to disable, comment this out
+    config = function()
+      local lint = require("lint")
 
-    lint.linters_by_ft = {
-      c = { "cpplint" },
-      cpp = { "cpplint" },
-    }
+      lint.linters_by_ft = {
+        c = { "cpplint" },
+        cpp = { "cpplint" },
+      }
 
-    lint.linters.cpplint.args = {
-      "--linelength=100 --filter=-build/class,-build/namespaces,-build/include_order,-whitespace/indent,-whitespace/parens,-whitespace/braces,-readability/namespace,-readability/function,-readability/nolint,-legal/copyright",
-    }
+      lint.linters.cpplint.args = {
+        "--linelength=100 --filter=-build/class,-build/namespaces,-build/include_order,-whitespace/indent,-whitespace/parens,-whitespace/braces,-readability/namespace,-readability/function,-readability/nolint,-legal/copyright",
+      }
 
-    local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+      local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 
-    vim.api.nvim_create_autocmd({ "bufenter", "bufwritepost", "insertleave" }, {
-      group = lint_augroup,
-      callback = function()
-        lint.try_lint()
-      end,
-    })
-  end,
-}
+      vim.api.nvim_create_autocmd({ "bufenter", "bufwritepost", "insertleave" }, {
+        group = lint_augroup,
+        callback = function()
+          lint.try_lint()
+        end,
+      })
+    end,
+  },
 }

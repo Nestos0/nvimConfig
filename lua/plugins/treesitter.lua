@@ -103,4 +103,25 @@ return {
       end
     end,
   },
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    event = "VeryLazy",
+    opts = {
+      separator = nil, -- 无分隔线
+      max_lines = 5, -- 最多显示 5 行上下文
+      multiwindow = true, -- 支持多窗口
+      min_window_height = 15, -- 窗口太小（<15 行）时禁用
+    },
+    config = function(_, opts)
+      require("treesitter-context").setup(opts)
+
+      -- 高亮设置（背景同 CursorLine，底部下划线）
+      vim.api.nvim_set_hl(0, "TreesitterContext", { link = "CursorLine" })
+      vim.api.nvim_set_hl(0, "TreesitterContextBottom", {
+        underline = true,
+        sp = "#b4befe", -- 可根据你的主题调整颜色（这里是 Catppuccin/Tokyonight 风格的 lavender）
+      })
+    end,
+  },
 }
