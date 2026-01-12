@@ -281,7 +281,7 @@ return {
           else return "? "
           end
         end,
-        hl = { fg = "orange", bold = true },
+        hl = { fg = "fg", bold = true },
       }
 
       local FileEncodingTab = {
