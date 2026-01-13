@@ -38,8 +38,8 @@ vim.keymap.set("n", "<leader>sa", '<cmd>!wl-paste | fold -w1 | sort | paste -sd 
 
 -- Core Navigation (Colemak HNEI-style logic)
 vim.keymap.set(modes, "u", "k", { desc = "Up", noremap = true, silent = true })
-vim.keymap.set(modes, "n", "<left>", { desc = "Left", noremap = true, silent = true })
-vim.keymap.set(modes, "i", "<right>", { desc = "Right", nowait = true, noremap = true, silent = true })
+vim.keymap.set(modes, "n", "h", { desc = "Left", noremap = true, silent = true })
+vim.keymap.set(modes, "i", "l", { desc = "Right", nowait = true, noremap = true, silent = true })
 vim.keymap.set(modes, "e", "j", { desc = "Down", noremap = true, silent = true })
 
 -- Undo / Redo (Mapping j to standard u/redo)

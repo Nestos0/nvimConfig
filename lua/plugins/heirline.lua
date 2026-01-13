@@ -95,7 +95,7 @@ return {
       }
 
       local FileNameBlock = {
-        condition = cond.buffer_not_empty,
+        -- condition = cond.buffer_not_empty,
         init = function(self)
           self.filename = vim.api.nvim_buf_get_name(0)
         end,
@@ -110,15 +110,15 @@ return {
         },
         {
           provider = function(self)
-            local filename = vim.fn.fnamemodify(self.filename or "", ":.")
+            local filename = vim.fn.fnamemodify(self.filename or "[No Name]", ":.")
             if filename == "" then return "[No Name]" end
-            return filename .. "  "
+            return filename
           end,
-          hl = { fg = "magenta", bold = true },
+          hl = function() return { fg = vim.bo.modified and "magenta" or "fg", bold = true } end,
         },
         {
-          provider = function(self)
-            return vim.bo.modified and " ●" or ""
+          provider = function()
+            return vim.bo.modified and " ●  " or "  "
           end,
           hl = { fg = "green", bold = true },
         },
