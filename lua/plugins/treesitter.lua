@@ -8,8 +8,20 @@ return {
       "posva/vim-vue",
       "windwp/nvim-ts-autotag",
     },
+    init = function()
+      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+
+      parser_config.c3 = {
+        install_info = {
+          url = "https://github.com/CM-IV/tree-sitter-c3",
+          files = { "src/parser.c", "src/scanner.c"  },
+          branch = "main",
+        },
+        filetype = "c3",
+      }
+    end,
     opts = {
-      ensure_installed = { "c", "lua", "vim", "vimdoc", "javascript", "html", "ruby", "go", "vue", "css", "scss", "zig", "typst" },
+      ensure_installed = { "c", "c3", "lua", "vim", "vimdoc", "javascript", "html", "ruby", "go", "vue", "css", "scss", "zig", "typst" },
       autotag = {
         enable = true,
         filetype = { "html", "vue" },

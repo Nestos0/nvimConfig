@@ -1,10 +1,10 @@
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "c", "cpp", "yacc" },
   callback = function()
-    vim.opt.expandtab = true
+    vim.opt.expandtab = false
     vim.opt.tabstop = 8
-    vim.opt.shiftwidth = 2
-    vim.opt.softtabstop = 2
+    vim.opt.shiftwidth = 8
+    vim.opt.softtabstop = 8
     vim.opt.textwidth = 100
     vim.opt.formatoptions = "croql"
     vim.opt_local.cinoptions = {

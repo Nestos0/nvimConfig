@@ -1,5 +1,4 @@
 return {
-  -- 1. Heirline.nvim: 构建 Evilline 状态栏（完美模仿 Lualine Eviline） + 极致中置 Bufferline
   {
     "rebelot/heirline.nvim",
     event = "UiEnter",
@@ -11,11 +10,9 @@ return {
       local conditions = require("heirline.conditions")
       local utils = require("heirline.utils")
 
-      -- 全局状态栏 + 始终显示 tabline
       vim.o.laststatus = 3
       vim.o.showtabline = 2
 
-      -- Evilline 调色板（精确匹配 Lualine Eviline）
       local colors = {
         bg = "#202328",
         fg = "#c0caf5",
@@ -33,7 +30,6 @@ return {
       }
       require("heirline").load_colors(colors)
 
-      -- 完整模式颜色映射（精确模仿 Lualine）
       local mode_colors = {
         n = colors.red,
         i = colors.green,
@@ -57,13 +53,11 @@ return {
         t = colors.red,
       }
 
-      -- 条件
       local cond = {
         buffer_not_empty = function() return vim.fn.empty(vim.fn.expand("%:t")) ~= 1 end,
         hide_in_width = function() return vim.fn.winwidth(0) > 80 end,
       }
 
-      -- ============ 组件 ============
       local ViModeLeft = { provider = "▊", hl = { fg = "blue" } }
 
       local ViModeIcon = {
@@ -78,6 +72,7 @@ return {
 
       local FileSize = {
         condition = cond.buffer_not_empty,
+        update = { "BufEnter", "BufWritePost" },
         provider = function()
           local file = vim.fn.expand("%:p")
           if file == "" then return "" end
@@ -95,10 +90,10 @@ return {
       }
 
       local FileNameBlock = {
-        -- condition = cond.buffer_not_empty,
         init = function(self)
           self.filename = vim.api.nvim_buf_get_name(0)
         end,
+        update = { "BufEnter", "BufModifiedSet", "DirChanged", "BufWritePost" },
         {
           init = function(self)
             local filename = self.filename or ""
@@ -143,6 +138,7 @@ return {
       }
 
       local LSPActive = {
+        update = { "LspAttach", "LspDetach", "BufEnter" },
         init = function(self)
           self.name = "No Active Lsp"
           self.tailwind = false
@@ -175,12 +171,14 @@ return {
 
       local FileEncoding = {
         condition = cond.hide_in_width,
+        update = { "BufEnter" },
         provider = function() return string.upper(vim.bo.fileencoding or vim.o.encoding) .. " " end,
         hl = { fg = "green", bold = true },
       }
 
       local FileFormat = {
         condition = cond.hide_in_width,
+        update = { "BufEnter" },
         provider = function() return string.upper(vim.bo.fileformat) .. " " end,
         hl = { fg = "green", bold = true },
       }
@@ -188,6 +186,7 @@ return {
       local GitBranch = {
         condition = conditions.is_git_repo,
         init = function(self) self.status_dict = vim.b.gitsigns_status_dict end,
+        update = { "User", pattern = "GitSignsUpdate" },
         provider = function(self) return " " .. (self.status_dict.head or "") .. " " end,
         hl = { fg = "violet", bold = true },
       }
@@ -195,6 +194,7 @@ return {
       local Diff = {
         condition = function() return conditions.is_git_repo() and cond.hide_in_width() end,
         init = function(self) self.status_dict = vim.b.gitsigns_status_dict end,
+        update = { "User", pattern = "GitSignsUpdate" },
         {
           provider = function(self) local count = self.status_dict.added or 0 return count > 0 and (" " .. count .. " ") or "" end,
           hl = { fg = "green" },
@@ -211,7 +211,6 @@ return {
 
       local ViModeRight = { provider = "▊", hl = { fg = "blue" } }
 
-      -- ============ StatusLine（全局，只用 active 风格） ============
       local StatusLine = {
         ViModeLeft,
         ViModeIcon,
@@ -220,9 +219,9 @@ return {
         Location,
         Progress,
         Diagnostics,
-        { provider = "%=" }, -- 左侧推到底
+        { provider = "%=" },
         LSPActive,
-        { provider = "%=" }, -- 右侧推到底 → LSP 完美居中
+        { provider = "%=" },
         FileEncoding,
         FileFormat,
         GitBranch,
@@ -230,7 +229,6 @@ return {
         ViModeRight,
       }
 
-      -- ============ Bufferline (Tabline) - 极致中置 ============
       local EvilLogo = {
         provider = "  ",
         hl = { fg = "green", bold = true, bg = "bg" },
@@ -267,6 +265,15 @@ return {
           hl = { fg = "green", bold = true },
         },
         { provider = " " },
+        on_click = {
+          callback = function(_, minwid)
+            vim.api.nvim_win_set_buf(0, minwid)
+          end,
+          minwid = function(self)
+            return self.bufnr
+          end,
+          name = "heirline_tabline_buffer_callback",
+        },
       }
 
       local LeftTrunc = { provider = "< ", hl = { fg = "dim" } }

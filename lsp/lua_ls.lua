@@ -1,21 +1,29 @@
+local library = {
+  unpack(vim.api.nvim_get_runtime_file("", true)),
+  vim.fn.expand(
+    "$HOME/.local/share/nvim/mason/packages/lua-language-server/libexec/meta/3rd/love2d"
+  ),
+}
+
 return {
   cmd = { "lua-language-server" },
   filetypes = { "lua" },
   settings = {
     Lua = {
+      runtime = {
+        version = "LuaJIT",
+      },
+
       diagnostics = {
-        -- disable = { "undefined-field" },
-        globals = { "vim", "love" },
+        globals = { "vim", "love", "conf" },
       },
-      globals = {
-        "love",
-        "conf",
-        -- 如果您自定义了全局对象，也放在这里
+
+      telemetry = {
+        enable = false,
       },
+
       workspace = {
-        library = {
-          [vim.fn.expand("$HOME/.local/share/nvim/mason/packages/lua-language-server/libexec/meta/3rd/love2d")] = true,
-        },
+        library = library,
         checkThirdParty = false,
       },
     },
