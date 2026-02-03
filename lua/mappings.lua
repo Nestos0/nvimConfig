@@ -15,7 +15,7 @@ local function HexToRGBA()
 end
 
 -- Delete specific default/plugin mapping
-vim.keymap.del("x", "in")
+-- vim.keymap.del("x", "in")
 
 -- Custom Command Mappings
 vim.keymap.set("n", "<leader>cr", HexToRGBA, { noremap = true, silent = true, desc = "Convert hex to RGBA" })
@@ -23,7 +23,6 @@ vim.keymap.set("n", "<C-W><C-N>", "", { noremap = true })
 
 -- Define shared modes and options to keep code DRY (Don't Repeat Yourself)
 local modes = { "n", "x", "o" }
-local opts = { noremap = true, silent = true }
 
 -- =============================================================================
 -- 2. Converted Nest Mappings (Native)
