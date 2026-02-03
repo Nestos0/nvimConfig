@@ -137,16 +137,16 @@ return {
       return {
         custom_key_maps = {
           -- 核心移动 (Colemak HNEI)
-          { { "n", "x" }, "u", motion.k, "nowrap"}, -- 向上
-          { { "n", "x" }, "e", motion.j, "nowrap"}, -- 向下
-          { { "n", "x" }, "n", motion.h, "nowrap"}, -- 向左
-          { { "n", "x" }, "i", motion.l, "nowrap"}, -- 向右
+          { { "n", "x" }, "u", motion.k, "nowrap" }, -- 向上
+          { { "n", "x" }, "e", motion.j, "nowrap" }, -- 向下
+          { { "n", "x" }, "n", motion.h, "nowrap" }, -- 向左
+          { { "n", "x" }, "i", motion.l, "nowrap" }, -- 向右
 
           -- 单词与末尾
-          { { "n", "x" }, "l", motion.w, "nowrap"},
-          { { "n", "x" }, "L", motion.W, "nowrap"},
-          { { "n", "x" }, "k", motion.e, "nowrap"},
-          { { "n", "x" }, "K", motion.E, "nowrap"},
+          { { "n", "x" }, "l", motion.w, "nowrap" },
+          { { "n", "x" }, "L", motion.W, "nowrap" },
+          { { "n", "x" }, "k", motion.e, "nowrap" },
+          { { "n", "x" }, "K", motion.E, "nowrap" },
 
           -- 行首行尾
           { { "n", "x" }, "N", motion.caret, "nowrap" },
@@ -303,16 +303,10 @@ return {
         desc = "Open Yank History",
       },
       {
-        "y",
+        "gy",
         "<Plug>(YankyYank)",
         mode = { "n", "x" },
         desc = "Yank text",
-      },
-      {
-        "p",
-        "<Plug>(YankyPutAfter)",
-        mode = { "n", "x" },
-        desc = "Put yanked text after cursor",
       },
       {
         "P",

@@ -1,10 +1,8 @@
 return {
   {
     "pmizio/typescript-tools.nvim",
-    lazy = true,
     ft = { "typescript", "javascript", "vue" },
-    -- enabled = false,
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    dependencies = { "nvim-lua/plenary.nvim" },
     opts = function()
       local api = require("typescript-tools.api")
       return {
@@ -24,15 +22,13 @@ return {
     end,
   },
   {
-    "luckasRanarison/tailwind-tools.nvim",
-    lazy = true,
-    -- ft = { "vue", "html", "css", "javascript" },
+    "Nestos0/tailwind-tools.nvim",
+    ft = { "vue", "html", "css", "javascript" },
     name = "tailwind-tools",
     build = ":UpdateRemotePlugins",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-telescope/telescope.nvim", -- optional
-      "neovim/nvim-lspconfig", -- optional
     },
     opts = {}, -- your configuration
   },
