@@ -45,6 +45,7 @@ vim.keymap.set(modes, "e", "j", { desc = "Down", noremap = true, silent = true }
 -- Undo / Redo (Mapping j to standard u/redo)
 vim.keymap.set(modes, "<C-/>", "u", { desc = "Undo", noremap = true, silent = true })
 vim.keymap.set(modes, "<C-_>", "u", { desc = "Undo", noremap = true, silent = true })
+vim.keymap.set(modes, "J", "<C-r>", { desc = "Redo", noremap = true, silent = true })
 
 -- Text Objects & Search
 vim.keymap.set(modes, "w", "i", { desc = "Insert", noremap = true, silent = true })

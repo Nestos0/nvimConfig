@@ -1,5 +1,5 @@
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "c", "cpp" },
+  pattern = { "c", "cpp", "yacc" },
   callback = function()
     vim.opt.expandtab = true
     vim.opt.tabstop = 8

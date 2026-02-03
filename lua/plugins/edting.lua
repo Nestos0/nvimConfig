@@ -83,11 +83,6 @@ return {
         cmap = "<A-k>",
         rcmap = "<A-K>",
       },
-      internal_pairs = {
-        { "[", "]", fly = true },
-        { "(", ")", fly = true },
-        { "{", "}", fly = true },
-      },
     },
   },
   {
@@ -123,28 +118,65 @@ return {
     priority = 1000,
   },
   {
-    "mg979/vim-visual-multi",
-    init = function()
-      vim.cmd([[
-      let g:VM_maps = {}
-      let g:VM_maps['Move Left']  = 'n'
-      let g:VM_maps['Move Down']  = 'e'
-      let g:VM_maps['Move Up']    = 'u'
-      let g:VM_maps['Move Right'] = 'i'
-      let g:VM_maps['Next Word']  = 'l'
-      let g:VM_maps['End Word']   = 'k'
-      let g:VM_maps['Undo']       = 'j'
-      let g:VM_maps['Redo']       = 'J'
-      let g:VM_maps['Switch Mode'] = 'w'
-    ]])
-    end,
-  },
-  {
     "kevinhwang91/nvim-fundo",
     lazy = true,
     event = "User IceLoad",
     requires = "kevinhwang91/promise-async",
     opts = {},
+  },
+  {
+    "brenton-leighton/multiple-cursors.nvim",
+    version = "*",
+    opts = function()
+      -- 在这里引入内部模块，确保它们已经可用
+      local motion = require("multiple-cursors.normal_mode.motion")
+      local mode_change = require("multiple-cursors.normal_mode.mode_change")
+      local visual_area = require("multiple-cursors.visual_mode.modify_area")
+
+      -- 返回最终的配置表格
+      return {
+        custom_key_maps = {
+          -- 核心移动 (Colemak HNEI)
+          { { "n", "x" }, "u", motion.k, "nowrap"}, -- 向上
+          { { "n", "x" }, "e", motion.j, "nowrap"}, -- 向下
+          { { "n", "x" }, "n", motion.h, "nowrap"}, -- 向左
+          { { "n", "x" }, "i", motion.l, "nowrap"}, -- 向右
+
+          -- 单词与末尾
+          { { "n", "x" }, "l", motion.w, "nowrap"},
+          { { "n", "x" }, "L", motion.W, "nowrap"},
+          { { "n", "x" }, "k", motion.e, "nowrap"},
+          { { "n", "x" }, "K", motion.E, "nowrap"},
+
+          -- 行首行尾
+          { { "n", "x" }, "N", motion.caret, "nowrap" },
+          { { "n", "x" }, "I", motion.dollar, "nowrap" },
+
+          -- 模式切换
+          { "n", "w", mode_change.i, "nowrap" }, -- w 键进入插入
+          { "n", "W", mode_change.I, "nowrap" }, -- W 键在行首插入
+
+          -- Visual 模式修正 (因为 i 被占用为 Right，这里将 inner 映射给 w)
+          { "x", "a", visual_area.a, "nowrap" },
+          { "x", "w", visual_area.i, "nowrap" },
+        },
+      }
+    end,
+    keys = {
+      { "<C-j>", "<Cmd>MultipleCursorsAddDown<CR>", mode = { "n", "x" }, desc = "Add cursor and move down" },
+      { "<C-k>", "<Cmd>MultipleCursorsAddUp<CR>", mode = { "n", "x" }, desc = "Add cursor and move up" },
+      { "<C-Up>", "<Cmd>MultipleCursorsAddUp<CR>", mode = { "n", "i", "x" }, desc = "Add cursor and move up" },
+      { "<C-Down>", "<Cmd>MultipleCursorsAddDown<CR>", mode = { "n", "i", "x" }, desc = "Add cursor and move down" },
+      { "<C-LeftMouse>", "<Cmd>MultipleCursorsMouseAddDelete<CR>", mode = { "n", "i" }, desc = "Add or remove cursor" },
+      { "<Leader>m", "<Cmd>MultipleCursorsAddVisualArea<CR>", mode = { "x" }, desc = "Add cursors to lines" },
+      { "<Leader>a", "<Cmd>MultipleCursorsAddMatches<CR>", mode = { "n", "x" }, desc = "Add cursors to cword" },
+      {
+        "<Leader>A",
+        "<Cmd>MultipleCursorsAddMatchesV<CR>",
+        mode = { "n", "x" },
+        desc = "Add cursors to matches in area",
+      },
+    },
   },
   {
     "smjonas/inc-rename.nvim",
