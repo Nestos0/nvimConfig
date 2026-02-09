@@ -70,7 +70,6 @@ return {
     cmd = "Mason",
     opts = {},
     dependencies = {
-      "neovim/nvim-lspconfig",
       "mason-org/mason-lspconfig.nvim",
       "stevearc/dressing.nvim",
     },
