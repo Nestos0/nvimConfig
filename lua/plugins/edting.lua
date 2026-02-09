@@ -11,11 +11,12 @@ return {
       local brackets = { { "(", ")" }, { "[", "]" }, { "{", "}" } }
       npairs.add_rules({
         -- Rule for a pair with left-side ' ' and right side ' '
-        Rule(" ", " ")
+        Rule(" ", " ") 
           -- Pair will only occur if the conditional function returns true
           :with_pair(function(opts)
             -- We are checking if we are inserting a space in (), [], or {}
             local pair = opts.line:sub(opts.col - 1, opts.col)
+            vim.print(pair)
             return vim.tbl_contains({
               brackets[1][1] .. brackets[1][2],
               brackets[2][1] .. brackets[2][2],
@@ -68,6 +69,7 @@ return {
           :use_key("<space>")
           :use_regex(true),
       })
+      npairs.get_rules("'")[1].not_filetypes = { 'clojure', 'scheme', 'lisp' }
     end,
   },
   {
