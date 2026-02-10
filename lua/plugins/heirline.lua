@@ -11,7 +11,7 @@ return {
       local utils = require("heirline.utils")
 
       vim.o.laststatus = 3
-      vim.o.showtabline = 2
+      vim.o.showtabline = 1
 
       local colors = {
         bg = "#202328",

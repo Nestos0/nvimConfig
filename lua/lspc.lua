@@ -1,4 +1,4 @@
-local vue_language_server_path = "/usr/lib/node_modules/@vue/language-server"
+local vue_language_server_path = "~/.local/share/nvim/mason/packages/vue-language-server/node_modules/@vue/language-server/"
 local tsserver_filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" }
 local vue_plugin = {
   name = "@vue/typescript-plugin",
