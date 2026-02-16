@@ -69,6 +69,7 @@ return {
           :use_key("<space>")
           :use_regex(true),
       })
+      npairs.get_rules("(")[1].not_filetypes = { 'clojure', 'scheme', 'lisp' }
       npairs.get_rules("'")[1].not_filetypes = { 'clojure', 'scheme', 'lisp' }
     end,
   },
@@ -89,7 +90,7 @@ return {
   },
   {
     "abecodes/tabout.nvim",
-    lazy = true,
+    lazy = false,
     config = function()
       require("tabout").setup({
         tabkey = "<Tab>", -- key to trigger tabout, set to an empty string to disable
