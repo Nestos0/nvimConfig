@@ -52,6 +52,8 @@ vim.keymap.set(modes, "l", "w", { desc = "Forward to next word", noremap = true,
 vim.keymap.set(modes, "h", "n", { desc = "Repeat latest find", noremap = true, silent = true })
 vim.keymap.set(modes, "k", "e", { desc = "Forward to next word end", noremap = true, silent = true })
 vim.keymap.set(modes, "j", "gJ", { desc = "Join without blank" })
+vim.keymap.set(modes, "zn", "zh", {desc = "Move view on to the left"})
+vim.keymap.set(modes, "zi", "zl", {desc = "Move view on to the right"})
 
 -- Shift (S-) Combinations / Uppercase
 vim.keymap.set(modes, "U", "<C-u>", { desc = "Scroll Up", noremap = true, silent = true })
