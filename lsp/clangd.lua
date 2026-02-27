@@ -1,5 +1,5 @@
 return {
-  cmd = { "clangd" },
+  cmd = { "clangd", "--compile-commands-dir=build" },
   filetypes = { "c", "cpp" },
   on_init = function(client)
     if client.server_capabilities.foldingRangeProvider then

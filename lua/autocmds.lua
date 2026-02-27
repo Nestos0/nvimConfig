@@ -14,6 +14,14 @@ vim.api.nvim_create_autocmd("User", {
   end,
 })
 
+vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete", "BufEnter" }, {
+  callback = function()
+    local count = #vim.fn.getbufinfo({ buflisted = 1 })
+    vim.opt.showtabline = count >= 2 and 2 or 0
+  end,
+  group = vim.api.nvim_create_augroup("SmartTabline", { clear = true }),
+})
+
 vim.api.nvim_create_autocmd("BufReadPre", {
   pattern = "*",
   once = true,
