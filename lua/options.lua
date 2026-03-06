@@ -26,7 +26,7 @@ opt.fillchars = { eob = " " }
 o.ignorecase = true
 o.smartcase = true
 o.mouse = "a"
-vim.opt.mousescroll = { 'ver:1', 'hor:1' }  -- 每滾輪事件只移動 1 行（預設 ver:3）
+vim.opt.mousescroll = { 'ver:5', 'hor:5' }
 
 o.formatoptions = "o"
 -- Numbers

@@ -7,6 +7,11 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt.softtabstop = 8
     vim.opt.textwidth = 100
     vim.opt.formatoptions = "croql"
+    vim.opt.foldmethod = "expr"
+    vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+    vim.opt.foldlevel = 99
+    vim.opt.foldlevelstart = 99
+    vim.opt.foldenable = true
     vim.opt_local.cinoptions = {
       ">2s",
       "e-s",
@@ -20,7 +25,7 @@ vim.api.nvim_create_autocmd("FileType", {
       "+.5s",
       "p2s",
       "t0",
-      "(0"
+      "(0",
     }
   end,
 })
