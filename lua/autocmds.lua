@@ -30,20 +30,6 @@ vim.api.nvim_create_autocmd("BufReadPre", {
   end,
 })
 
-vim.api.nvim_create_autocmd("BufEnter", {
-  pattern = "*",
-  callback = function(args)
-    if vim.bo[args.buf].filetype ~= "neo-tree" then
-      vim.defer_fn(function()
-        if vim.api.nvim_buf_is_valid(args.buf) then
-          -- 检查当前 buffer 是否已经有 Treesitter 高亮
-          vim.cmd("TSEnable highlight")
-        end
-      end, 50)
-    end
-  end,
-})
-
 vim.api.nvim_create_augroup("IrreplaceableWindows", { clear = true })
 
 vim.api.nvim_create_autocmd("BufWinEnter", {
