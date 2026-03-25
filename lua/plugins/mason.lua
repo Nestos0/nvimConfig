@@ -30,16 +30,11 @@ return {
 
         -- a list of all tools you want to ensure are installed upon
         ensure_installed = {
-
-          -- you can pin a tool to a particular version
-          { "golangci-lint", version = "v1.47.0" },
-
           -- you can turn off/on auto_update per tool
           { "bash-language-server", auto_update = true },
 
           --'lua-language-server',
           "vim-language-server",
-          "gopls",
           "clang-format",
           "stylua",
           "prettierd",
@@ -47,17 +42,8 @@ return {
           "black",
           "isort",
           "shellcheck",
-          "gofumpt",
-          "golines",
-          "gomodifytags",
-          "gotests",
-          "impl",
-          "jq",
-          "misspell",
-          "revive",
           "shellcheck",
           "shfmt",
-          "staticcheck",
           "vint",
         },
       })
@@ -78,11 +64,8 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = {
           "clangd",
-          "jqls",
-          "gopls",
           "html",
           "bashls",
-          "jqls",
           "eslint",
           "pyright",
           "jsonls",

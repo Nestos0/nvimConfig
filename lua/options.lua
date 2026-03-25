@@ -9,7 +9,7 @@ o.showmode = false
 
 -- wo.scroll = 15
 
-o.completeopt = 'menu,menuone,preview'
+o.completeopt = "menu,menuone,preview"
 o.clipboard = "unnamed"
 o.cursorline = true
 o.cursorlineopt = "number"
@@ -18,15 +18,15 @@ o.cursorlineopt = "number"
 o.expandtab = true
 o.autoindent = true
 o.smartindent = true
-o.tabstop = 2
-o.shiftwidth = 2
-o.softtabstop = 2
+o.tabstop = 4
+o.shiftwidth = 4
+o.softtabstop = 4
 
 opt.fillchars = { eob = " " }
 o.ignorecase = true
 o.smartcase = true
 o.mouse = "a"
-vim.opt.mousescroll = { 'ver:5', 'hor:5' }
+vim.opt.mousescroll = { "ver:5", "hor:5" }
 
 o.formatoptions = "o"
 -- Numbers
@@ -42,7 +42,6 @@ o.signcolumn = "yes"
 o.splitbelow = true
 o.splitright = true
 o.timeoutlen = 400
-
 
 -- go to previous/next line with h,l,left arrow and right arrow
 -- when cursor reaches end/beginning of line
@@ -76,22 +75,22 @@ opt.pumblend = 0 -- Popup blend
 opt.pumheight = 10 -- Maximum number of entries in a popup
 opt.relativenumber = true -- Relative line numbers
 opt.showmode = false -- We have a status line and modicator
-opt.signcolumn = 'yes' -- Always show the signcolumn, otherwise it would shift the text each time
+opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
 opt.smartcase = true -- Don't ignore case with capitals
 opt.smartindent = true -- Insert indents automatically
-opt.spelllang = { 'en' }
+opt.spelllang = { "en" }
 opt.termguicolors = true -- True color support
 opt.undofile = true
-opt.swapfile = false        -- 禁用交换文件
-opt.backup = false          -- 禁用备份文件
-opt.writebackup = false     -- 禁用写入备份
+opt.swapfile = false -- 禁用交换文件
+opt.backup = false -- 禁用备份文件
+opt.writebackup = false -- 禁用写入备份
 opt.undolevels = 10000
 opt.updatetime = 200 -- Save swap file and trigger CursorHold
-opt.virtualedit = 'block' -- Allow cursor to move where there is no text in visual block mode
+opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
 opt.wrap = false -- Line wrapping
 
 -- don't show the neovim dashboard
-opt.shortmess:append('I')
+opt.shortmess:append("I")
 
 -- -- statusline
 -- opt.cmdheight = 0
@@ -101,21 +100,21 @@ opt.shortmess:append('I')
 
 -- Default splitting will cause your main splits to jump when opening an edgebar.
 -- To prevent this, set `splitkeep` to either `screen` or `topline`.
-opt.splitkeep = 'screen'
+opt.splitkeep = "screen"
 opt.foldcolumn = "0"
 
 opt.list = true
-opt.listchars:append('space:⋅')
-opt.listchars:append('trail:⋅')
+opt.listchars:append("space:⋅")
+opt.listchars:append("trail:⋅")
 opt.fillchars = {
-	fold = ' ', -- or "⸱"
-	foldopen = '',
-	foldclose = '',
-	foldsep = ' ',
-	diff = '╱',
-	eob = ' ',
+  fold = " ", -- or "⸱"
+  foldopen = "",
+  foldclose = "",
+  foldsep = " ",
+  diff = "╱",
+  eob = " ",
 
-	vert = ' ',
+  vert = " ",
 }
 
 opt.mousemoveevent = true
@@ -124,15 +123,15 @@ opt.mousemoveevent = true
 -- g.lsp_semantic_enabled = 1
 
 if g.neovide then
-	opt.linespace = 4
-	g.neovide_scale_factor = 1.0
-	g.neovide_refresh_rate = 288
-	g.neovide_cursor_trail_size = 0.1
-	g.neovide_cursor_animation_length = 0.05
-	g.neovide_scroll_animation_length = 0.1 -- 0.1 to enable, 0 to disable
-	-- https://github.com/neovide/neovide/issues/1325#issuecomment-1281570219
-	-- g.neovide_font_hinting = 'none'
-	-- g.neovide_font_edging = 'subpixelantialias'
+  opt.linespace = 4
+  g.neovide_scale_factor = 1.0
+  g.neovide_refresh_rate = 288
+  g.neovide_cursor_trail_size = 0.1
+  g.neovide_cursor_animation_length = 0.05
+  g.neovide_scroll_animation_length = 0.1 -- 0.1 to enable, 0 to disable
+  -- https://github.com/neovide/neovide/issues/1325#issuecomment-1281570219
+  -- g.neovide_font_hinting = 'none'
+  -- g.neovide_font_edging = 'subpixelantialias'
 end
 
 vim.diagnostic.config({
@@ -152,5 +151,3 @@ vim.diagnostic.config({
   },
   update_in_insert = false,
 })
-
-
