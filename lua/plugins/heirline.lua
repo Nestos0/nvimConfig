@@ -1,3 +1,31 @@
+local function get_buf_names()
+  local tbl = {}
+  tbl = vim.tbl_filter(function(bufnr)
+    return vim.api.nvim_get_option_value("buflisted", { buf = bufnr })
+  end, vim.api.nvim_list_bufs())
+  local ret = {}
+  for _, id in ipairs(tbl) do
+    table.insert(ret, vim.api.nvim_buf_get_name(id))
+  end
+  return ret
+end
+
+local function is_repeated(name)
+  if name == "" then
+    return false
+  end
+
+  local count = 0
+
+  for _, buf_name in ipairs(get_buf_names()) do
+    if vim.fs.basename(buf_name) == name then
+      count = count + 1
+    end
+  end
+
+  return count > 0
+end
+
 return {
   {
     "rebelot/heirline.nvim",
@@ -26,7 +54,7 @@ return {
         magenta = "#c678dd",
         blue = "#51afef",
         red = "#ec5f67",
-        tabline_bg = "#16161e"
+        tabline_bg = "#16161e",
       }
       require("heirline").load_colors(colors)
 
@@ -54,14 +82,20 @@ return {
       }
 
       local cond = {
-        buffer_not_empty = function() return vim.fn.empty(vim.fn.expand("%:t")) ~= 1 end,
-        hide_in_width = function() return vim.fn.winwidth(0) > 80 end,
+        buffer_not_empty = function()
+          return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
+        end,
+        hide_in_width = function()
+          return vim.fn.winwidth(0) > 80
+        end,
       }
 
       local ViModeLeft = { provider = "▊", hl = { fg = "blue" } }
 
       local ViModeIcon = {
-        init = function(self) self.mode = vim.fn.mode(1) end,
+        init = function(self)
+          self.mode = vim.fn.mode(1)
+        end,
         provider = "  ",
         hl = function(self)
           local mode = self.mode:sub(1, 1)
@@ -75,9 +109,13 @@ return {
         update = { "BufEnter", "BufWritePost" },
         provider = function()
           local file = vim.fn.expand("%:p")
-          if file == "" then return "" end
+          if file == "" then
+            return ""
+          end
           local size = vim.fn.getfsize(file)
-          if size <= 0 then return "" end
+          if size <= 0 then
+            return ""
+          end
           local suffixes = { "B", "KB", "MB", "GB" }
           local i = 1
           while size >= 1024 and i < #suffixes do
@@ -98,18 +136,27 @@ return {
           init = function(self)
             local filename = self.filename or ""
             local extension = vim.fn.fnamemodify(filename, ":e")
-            self.icon, self.icon_color = require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
+            self.icon, self.icon_color =
+              require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
           end,
-          provider = function(self) return self.icon and (" " .. self.icon .. " ") end,
-          hl = function(self) return { fg = self.icon_color } end,
+          provider = function(self)
+            return self.icon and (" " .. self.icon .. " ")
+          end,
+          hl = function(self)
+            return { fg = self.icon_color }
+          end,
         },
         {
           provider = function(self)
             local filename = vim.fn.fnamemodify(self.filename or "[No Name]", ":.")
-            if filename == "" then return "[No Name]" end
+            if filename == "" then
+              return "[No Name]"
+            end
             return filename
           end,
-          hl = function() return { fg = vim.bo.modified and "magenta" or "fg", bold = true } end,
+          hl = function()
+            return { fg = vim.bo.modified and "magenta" or "fg", bold = true }
+          end,
         },
         {
           provider = function()
@@ -132,9 +179,24 @@ return {
           self.infos = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
         end,
         update = { "DiagnosticChanged", "BufEnter" },
-        { provider = function(self) return self.errors > 0 and (self.error_icon .. self.errors .. " ") end, hl = { fg = "red" } },
-        { provider = function(self) return self.warnings > 0 and (self.warn_icon .. self.warnings .. " ") end, hl = { fg = "yellow" } },
-        { provider = function(self) return self.infos > 0 and (self.info_icon .. self.infos .. " ") end, hl = { fg = "cyan" } },
+        {
+          provider = function(self)
+            return self.errors > 0 and (self.error_icon .. self.errors .. " ")
+          end,
+          hl = { fg = "red" },
+        },
+        {
+          provider = function(self)
+            return self.warnings > 0 and (self.warn_icon .. self.warnings .. " ")
+          end,
+          hl = { fg = "yellow" },
+        },
+        {
+          provider = function(self)
+            return self.infos > 0 and (self.info_icon .. self.infos .. " ")
+          end,
+          hl = { fg = "cyan" },
+        },
       }
 
       local LSPActive = {
@@ -144,7 +206,9 @@ return {
           self.tailwind = false
           local buf_ft = vim.bo.filetype
           local clients = vim.lsp.get_clients({ bufnr = 0 })
-          if #clients == 0 then return end
+          if #clients == 0 then
+            return
+          end
           for _, client in ipairs(clients) do
             local filetypes = client.config.filetypes or {}
             if vim.tbl_contains(filetypes, buf_ft) then
@@ -159,12 +223,18 @@ return {
           end
         end,
         provider = function(self)
-          if self.name == "No Active Lsp" then return "" end
-          if self.tailwind then return self.name .. " " end
+          if self.name == "No Active Lsp" then
+            return ""
+          end
+          if self.tailwind then
+            return self.name .. " "
+          end
           return " LSP: " .. self.name .. " "
         end,
         hl = function(self)
-          if self.tailwind then return { fg = "#38bdf8", bold = true } end
+          if self.tailwind then
+            return { fg = "#38bdf8", bold = true }
+          end
           return { fg = "#ffffff", bold = true }
         end,
       }
@@ -172,39 +242,60 @@ return {
       local FileEncoding = {
         condition = cond.hide_in_width,
         update = { "BufEnter" },
-        provider = function() return string.upper(vim.bo.fileencoding or vim.o.encoding) .. " " end,
+        provider = function()
+          return string.upper(vim.bo.fileencoding or vim.o.encoding) .. " "
+        end,
         hl = { fg = "green", bold = true },
       }
 
       local FileFormat = {
         condition = cond.hide_in_width,
         update = { "BufEnter" },
-        provider = function() return string.upper(vim.bo.fileformat) .. " " end,
+        provider = function()
+          return string.upper(vim.bo.fileformat) .. " "
+        end,
         hl = { fg = "green", bold = true },
       }
 
       local GitBranch = {
         condition = conditions.is_git_repo,
-        init = function(self) self.status_dict = vim.b.gitsigns_status_dict end,
+        init = function(self)
+          self.status_dict = vim.b.gitsigns_status_dict
+        end,
         update = { "User", pattern = "GitSignsUpdate" },
-        provider = function(self) return " " .. (self.status_dict.head or "") .. " " end,
+        provider = function(self)
+          return " " .. (self.status_dict.head or "") .. " "
+        end,
         hl = { fg = "violet", bold = true },
       }
 
       local Diff = {
-        condition = function() return conditions.is_git_repo() and cond.hide_in_width() end,
-        init = function(self) self.status_dict = vim.b.gitsigns_status_dict end,
+        condition = function()
+          return conditions.is_git_repo() and cond.hide_in_width()
+        end,
+        init = function(self)
+          self.status_dict = vim.b.gitsigns_status_dict
+        end,
         update = { "User", pattern = "GitSignsUpdate" },
         {
-          provider = function(self) local count = self.status_dict.added or 0 return count > 0 and (" " .. count .. " ") or "" end,
+          provider = function(self)
+            local count = self.status_dict.added or 0
+            return count > 0 and (" " .. count .. " ") or ""
+          end,
           hl = { fg = "green" },
         },
         {
-          provider = function(self) local count = self.status_dict.changed or 0 return count > 0 and ("󰝤 " .. count .. " ") or "" end,
+          provider = function(self)
+            local count = self.status_dict.changed or 0
+            return count > 0 and ("󰝤 " .. count .. " ") or ""
+          end,
           hl = { fg = "orange" },
         },
         {
-          provider = function(self) local count = self.status_dict.removed or 0 return count > 0 and (" " .. count .. " ") or "" end,
+          provider = function(self)
+            local count = self.status_dict.removed or 0
+            return count > 0 and (" " .. count .. " ") or ""
+          end,
           hl = { fg = "red" },
         },
       }
@@ -237,25 +328,41 @@ return {
       local BufferComponent = {
         init = function(self)
           self.is_active = self.bufnr == vim.api.nvim_get_current_buf()
+          local name = vim.api.nvim_buf_get_name(self.bufnr or 0)
+          self.buf_name = name and name or "[No Name]"
         end,
         hl = function(self)
-          return { fg = self.is_active and "fg" or "dim", bg = self.is_active and "bg" or "tabline_bg", bold = self.is_active }
+          return {
+            fg = self.is_active and "fg" or "dim",
+            bg = self.is_active and "bg" or "tabline_bg",
+            bold = self.is_active,
+          }
         end,
         { provider = " " },
         {
           init = function(self)
-            local filename = vim.api.nvim_buf_get_name(self.bufnr or 0)
+            local filename = self.buf_name
             local extension = vim.fn.fnamemodify(filename, ":e")
-            self.icon, self.icon_color = require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
+            self.icon, self.icon_color =
+              require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
           end,
-          provider = function(self) return self.icon and (self.icon .. " ") end,
-          hl = function(self) return { fg = self.icon_color } end,
+          provider = function(self)
+            return self.icon and (self.icon .. " ")
+          end,
+          hl = function(self)
+            return { fg = self.icon_color }
+          end,
         },
         {
           provider = function(self)
-            local filename = vim.api.nvim_buf_get_name(self.bufnr or 0)
-            local name = filename ~= "" and vim.fn.fnamemodify(filename, ":t") or "[No Name]"
-            return name .. " "
+            local filename = vim.fs.basename(self.buf_name)
+
+            if is_repeated(filename) then
+              local dir = vim.fs.basename(vim.fs.dirname(self.buf_name))
+              return dir .. "/" .. filename .. " "
+            end
+
+            return filename .. " "
           end,
         },
         {
@@ -282,10 +389,14 @@ return {
       local FileFormatSymbol = {
         provider = function()
           local fmt = vim.bo.fileformat
-          if fmt == "unix" then return " "
-          elseif fmt == "dos" then return " "
-          elseif fmt == "mac" then return " "
-          else return "? "
+          if fmt == "unix" then
+            return " "
+          elseif fmt == "dos" then
+            return " "
+          elseif fmt == "mac" then
+            return " "
+          else
+            return "? "
           end
         end,
         hl = { fg = "fg", bold = true },
