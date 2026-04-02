@@ -61,12 +61,24 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     vim.wo.list = false -- 禁用当前窗口的 list（制表符/空格可视化）
     vim.schedule(function()
-          if Snacks and Snacks.indent and Snacks.indent.disable then
-            Snacks.indent.disable()
-          end
-        end)
-      end,
+      if Snacks and Snacks.indent and Snacks.indent.disable then
+        Snacks.indent.disable()
+      end
+    end)
+  end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "text" },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+    vim.keymap.set("n", "u", "gk", { desc = "Up", noremap = true, silent = true })
+    vim.keymap.set("n", "e", "gj", { desc = "Down", noremap = true, silent = true })
+  end,
+})
+
 -- vim.api.nvim_create_autocmd("BufReadPost", {
 --   group = list_disable_group,
 --   pattern = { "*.org" },

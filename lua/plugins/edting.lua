@@ -1,9 +1,8 @@
 return {
+  "moll/vim-bbye",
   {
-    "~/ultimate-autopair.nvim",
-    dir = "~/ultimate-autopair.nvim",
+    "Nestos0/ultimate-autopair.nvim",
     opts = {
-      --Config goes here
       fastwarp = {
         enable = true,
         map = "<A-k>",
