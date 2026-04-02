@@ -82,9 +82,8 @@ vim.keymap.set(modes, "<C-w>E", "<C-w>J", { desc = "Window down (full)", noremap
 vim.keymap.set(modes, "<C-w>U", "<C-w>K", { desc = "Window up (full)", noremap = true, silent = true })
 
 -- Alt (A-) Combinations
-vim.keymap.set(modes, "<A-v>", "<cmd>vsplit<CR>", { desc = "Vertical split", noremap = true, silent = true })
-vim.keymap.set(modes, "<A-b>", "<cmd>split<CR>", { desc = "Horizontal split", noremap = true, silent = true })
-vim.keymap.set(modes, "<A-q>", "<cmd>bd | bp<CR>", { desc = "Close buffer and previous", noremap = true, silent = true })
+vim.keymap.set(modes, "<A-t>", "<cmd>tab split<CR>", { desc = "Tab split", noremap = true, silent = true })
+vim.keymap.set(modes, "<A-q>", "<cmd>Bdelete<CR>", { desc = "Close buffer and previous", noremap = true, silent = true })
 
 -- 'g' prefix mappings
 vim.keymap.set(modes, "gl", "ge", { desc = "Backward to next word end", noremap = true, silent = true })
