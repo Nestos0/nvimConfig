@@ -97,4 +97,5 @@ vim.keymap.set(modes, "gL", "gE", { desc = "Backward to next WORD end", noremap 
 vim.keymap.set("x", "p", [["_dP]], { noremap = true, desc = "Paste without yank" })
 
 -- LSP / Telescope
+vim.keymap.set("n", "gK", "K", {noremap = true, desc = "Runs the given program by 'keywordprg'"})
 vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", { noremap = true, desc = "Show Definitions" })

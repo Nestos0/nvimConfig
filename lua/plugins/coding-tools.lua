@@ -3,8 +3,8 @@ return {
   {
     "mluders/comfy-line-numbers.nvim",
     opts = {
-        up_key = "u",
-        down_key = "e",
+      up_key = "u",
+      down_key = "e",
     },
   },
   {
@@ -97,5 +97,17 @@ return {
         },
       })
     end,
+  },
+  {
+    "kawre/leetcode.nvim",
+    dependencies = {
+      -- include a picker of your choice, see picker section for more details
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+    },
+    opts = {
+        lang = "c"
+      -- configuration goes here
+    },
   },
 }

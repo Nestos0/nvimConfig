@@ -9,7 +9,7 @@ return {
       "windwp/nvim-ts-autotag",
     },
     opts = {
-      ensure_installed = { "c", "c3", "lua", "vim", "vimdoc", "javascript", "html", "ruby", "go", "vue", "css", "scss", "zig", "typst" },
+      ensure_installed = { "c", "haskell", "lua", "vim", "vimdoc", "javascript", "html", "ruby", "go", "vue", "css", "scss", "zig", "typst" },
       autotag = {
         enable = true,
         filetype = { "html", "vue" },

@@ -1,6 +1,6 @@
 return {
-  cmd = { "clangd", "--compile-commands-dir=build" },
-  filetypes = { "c", "cpp" },
+  cmd = { "clangd", "--compile-commands-dir=build", "--query-driver=/usr/bin/gcc,/usr/bin/clang" },
+  filetypes = { "c" },
   on_init = function(client)
     if client.server_capabilities.foldingRangeProvider then
       vim.opt.foldmethod = "expr"
