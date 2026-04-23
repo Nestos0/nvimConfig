@@ -1,2 +1,2 @@
 lua/plugins/develop.lua
-.lazylock
+lazy-lock.json
