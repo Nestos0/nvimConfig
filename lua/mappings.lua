@@ -1,7 +1,3 @@
--- =============================================================================
--- 1. Helper Functions & Basic Settings
--- =============================================================================
-
 local function HexToRGBA()
   local hex = vim.fn.expand("<cword>")
   local r, g, b = hex:match("#?(%x%x)(%x%x)(%x%x)")
@@ -23,10 +19,6 @@ vim.keymap.set("n", "<C-W><C-N>", "", { noremap = true })
 
 -- Define shared modes and options to keep code DRY (Don't Repeat Yourself)
 local modes = { "n", "x", "o" }
-
--- =============================================================================
--- 2. Converted Nest Mappings (Native)
--- =============================================================================
 
 -- Leader mappings
 vim.keymap.set("n", "<leader>d", "", { desc = "Dap" })
@@ -88,10 +80,6 @@ vim.keymap.set(modes, "<A-q>", "<cmd>Bdelete<CR>", { desc = "Close buffer and pr
 -- 'g' prefix mappings
 vim.keymap.set(modes, "gl", "ge", { desc = "Backward to next word end", noremap = true, silent = true })
 vim.keymap.set(modes, "gL", "gE", { desc = "Backward to next WORD end", noremap = true, silent = true })
-
--- =============================================================================
--- 3. Standalone Final Mappings
--- =============================================================================
 
 -- Visual mode paste without overwriting register
 vim.keymap.set("x", "p", [["_dP]], { noremap = true, desc = "Paste without yank" })
