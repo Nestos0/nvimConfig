@@ -237,6 +237,7 @@ return {
           lua = { "stylua", lsp_format = "never" },
           c = { "clang-format" },
           cpp = { "clang-format" },
+          rust = { "rustfmt" },
           -- Conform will run multiple formatters sequentially
           python = { "isort", "black" },
           javascript = { "prettierd", "prettier" },
@@ -260,6 +261,32 @@ return {
         },
       }
       return opts
+    end,
+  },
+  {
+    "mrcjkb/rustaceanvim",
+    version = "^4", -- 推荐使用 major 版本
+    ft = { "rust" },
+    opts = {
+      server = {
+        on_attach = function(client, bufnr)
+          -- 这里可以绑定快捷键，例如：
+          vim.keymap.set("n", "K", function()
+            vim.cmd.LspStop()
+          end, { buffer = bufnr })
+        end,
+        default_settings = {
+          -- rust-analyzer 的具体配置
+          ["rust-analyzer"] = {
+            checkOnSave = {
+              command = "clippy", -- 保存时自动跑 clippy
+            },
+          },
+        },
+      },
+    },
+    config = function(_, opts)
+      vim.g.rustaceanvim = opts
     end,
   },
   {
