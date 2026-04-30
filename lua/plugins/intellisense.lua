@@ -238,7 +238,7 @@ return {
           c = { "clang-format" },
           cpp = { "clang-format" },
           rust = { "rustfmt" },
-          makefile = { "mbake" },
+          make = { "mbake" },
           -- Conform will run multiple formatters sequentially
           python = { "isort", "black" },
           javascript = { "prettierd", "prettier" },
