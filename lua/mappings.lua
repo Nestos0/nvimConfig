@@ -36,6 +36,8 @@ vim.keymap.set(modes, "u", "k", { desc = "Up", noremap = true, silent = true })
 vim.keymap.set(modes, "n", "h", { desc = "Left", noremap = true, silent = true })
 vim.keymap.set(modes, "i", "l", { desc = "Right", nowait = true, noremap = true, silent = true })
 vim.keymap.set(modes, "e", "j", { desc = "Down", noremap = true, silent = true })
+vim.keymap.set("i", "<C-a>", "<home>", { desc = "goto start of this line", noremap = true, silent = true })
+vim.keymap.set("i", "<C-e>", "<end>", { desc = "goto end of this line", noremap = true, silent = true })
 
 -- Undo / Redo (Mapping j to standard u/redo)
 vim.keymap.set(modes, "<C-/>", "u", { desc = "Undo", noremap = true, silent = true })
@@ -45,10 +47,10 @@ vim.keymap.set(modes, "J", "<C-r>", { desc = "Redo", noremap = true, silent = tr
 -- Text Objects & Search
 vim.keymap.set("n", "w", "i", { desc = "Insert", noremap = true, silent = true })
 vim.keymap.set({ "x", "o" }, "w", "i", { desc = "Inner", noremap = true, silent = true, remap = false })
-vim.keymap.set( "x" , "wn", "in", { desc = "Select child (inner) node", noremap = true, silent = true, remap = true })
+vim.keymap.set("x", "wn", "in", { desc = "Select child (inner) node", noremap = true, silent = true, remap = true })
 
 -- 将内置的 'an' (outer node) 功能映射到 'gn'
-vim.keymap.set('x', 'gn', 'an', { desc = "Select Parent Node (Built-in)" })
+vim.keymap.set("x", "gn", "an", { desc = "Select Parent Node (Built-in)" })
 vim.keymap.set(modes, "l", "w", { desc = "Forward to next word", noremap = true, silent = true })
 vim.keymap.set(modes, "h", "n", { desc = "Repeat latest find", noremap = true, silent = true })
 vim.keymap.set(modes, "k", "e", { desc = "Forward to next word end", noremap = true, silent = true })
@@ -81,6 +83,8 @@ vim.keymap.set(modes, "<C-w>N", "<C-w>H", { desc = "Window left (full)", noremap
 vim.keymap.set(modes, "<C-w>I", "<C-w>L", { desc = "Window right (full)", noremap = true, silent = true })
 vim.keymap.set(modes, "<C-w>E", "<C-w>J", { desc = "Window down (full)", noremap = true, silent = true })
 vim.keymap.set(modes, "<C-w>U", "<C-w>K", { desc = "Window up (full)", noremap = true, silent = true })
+vim.keymap.set(modes, "<M-n>", "<C-w><left>", { desc = "Window left", noremap = true, silent = true })
+vim.keymap.set(modes, "<M-i>", "<C-w><right>", { desc = "Window right", noremap = true, silent = true })
 
 -- Alt (A-) Combinations
 vim.keymap.set(modes, "<A-t>", "<cmd>tab split<CR>", { desc = "Tab split", noremap = true, silent = true })
