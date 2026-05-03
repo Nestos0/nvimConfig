@@ -24,8 +24,12 @@ local modes = { "n", "x", "o" }
 vim.keymap.set("n", "<leader>d", "", { desc = "Dap" })
 vim.keymap.set("n", "<leader>u", "", { desc = "Undo" })
 vim.keymap.set("n", "<leader>s", "", { desc = "Sort OR Noice" })
-vim.keymap.set("n", "<leader>sa", '<cmd>!wl-paste | fold -w1 | sort | paste -sd "" | paste -sd "" | tr -d \'\\n\' | wl-copy<CR><CR>', 
-    { silent = true, desc = "Sort copied by alphabet" })
+vim.keymap.set(
+  "n",
+  "<leader>sa",
+  '<cmd>!wl-paste | fold -w1 | sort | paste -sd "" | paste -sd "" | tr -d \'\\n\' | wl-copy<CR><CR>',
+  { silent = true, desc = "Sort copied by alphabet" }
+)
 
 -- Core Navigation (Colemak HNEI-style logic)
 vim.keymap.set(modes, "u", "k", { desc = "Up", noremap = true, silent = true })
@@ -39,13 +43,18 @@ vim.keymap.set(modes, "<C-_>", "u", { desc = "Undo", noremap = true, silent = tr
 vim.keymap.set(modes, "J", "<C-r>", { desc = "Redo", noremap = true, silent = true })
 
 -- Text Objects & Search
-vim.keymap.set(modes, "w", "i", { desc = "Insert", noremap = true, silent = true })
+vim.keymap.set("n", "w", "i", { desc = "Insert", noremap = true, silent = true })
+vim.keymap.set({ "x", "o" }, "w", "i", { desc = "Inner", noremap = true, silent = true, remap = false })
+vim.keymap.set( "x" , "wn", "in", { desc = "Select child (inner) node", noremap = true, silent = true, remap = true })
+
+-- 将内置的 'an' (outer node) 功能映射到 'gn'
+vim.keymap.set('x', 'gn', 'an', { desc = "Select Parent Node (Built-in)" })
 vim.keymap.set(modes, "l", "w", { desc = "Forward to next word", noremap = true, silent = true })
 vim.keymap.set(modes, "h", "n", { desc = "Repeat latest find", noremap = true, silent = true })
 vim.keymap.set(modes, "k", "e", { desc = "Forward to next word end", noremap = true, silent = true })
 vim.keymap.set(modes, "j", "gJ", { desc = "Join without blank" })
-vim.keymap.set(modes, "zn", "zh", {desc = "Move view on to the left"})
-vim.keymap.set(modes, "zi", "zl", {desc = "Move view on to the right"})
+vim.keymap.set(modes, "zn", "zh", { desc = "Move view on to the left" })
+vim.keymap.set(modes, "zi", "zl", { desc = "Move view on to the right" })
 
 -- Shift (S-) Combinations / Uppercase
 vim.keymap.set(modes, "U", "<C-u>", { desc = "Scroll Up", noremap = true, silent = true })
@@ -75,7 +84,12 @@ vim.keymap.set(modes, "<C-w>U", "<C-w>K", { desc = "Window up (full)", noremap =
 
 -- Alt (A-) Combinations
 vim.keymap.set(modes, "<A-t>", "<cmd>tab split<CR>", { desc = "Tab split", noremap = true, silent = true })
-vim.keymap.set(modes, "<A-q>", "<cmd>Bdelete<CR>", { desc = "Close buffer and previous", noremap = true, silent = true })
+vim.keymap.set(
+  modes,
+  "<A-q>",
+  "<cmd>Bdelete<CR>",
+  { desc = "Close buffer and previous", noremap = true, silent = true }
+)
 
 -- 'g' prefix mappings
 vim.keymap.set(modes, "gl", "ge", { desc = "Backward to next word end", noremap = true, silent = true })
@@ -85,5 +99,5 @@ vim.keymap.set(modes, "gL", "gE", { desc = "Backward to next WORD end", noremap 
 vim.keymap.set("x", "p", [["_dP]], { noremap = true, desc = "Paste without yank" })
 
 -- LSP / Telescope
-vim.keymap.set("n", "gK", "K", {noremap = true, desc = "Runs the given program by 'keywordprg'"})
+vim.keymap.set("n", "gK", "K", { noremap = true, desc = "Runs the given program by 'keywordprg'" })
 vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", { noremap = true, desc = "Show Definitions" })
