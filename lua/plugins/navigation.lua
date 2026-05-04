@@ -60,6 +60,7 @@ return {
       },
       { "<leader>tb", "<Cmd>Telescope buffers<CR>", desc = "manage buffers", silent = true },
       { "<leader>uu", "<Cmd>Telescope undo<CR>", desc = "Telescope undotree", silent = true },
+      { "<leader>td", "<Cmd>Telescope lsp_document_symbols<CR>", desc = "Lisp Functions/Methods of this file", silent = true },
       {
         "<leader>ps",
         function()
