@@ -21,17 +21,6 @@ return {
       }
     end,
   },
-  {
-    "Nestos0/tailwind-tools.nvim",
-    ft = { "vue", "html", "css", "javascript" },
-    name = "tailwind-tools",
-    build = ":UpdateRemotePlugins",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-telescope/telescope.nvim", -- optional
-    },
-    opts = {}, -- your configuration
-  },
   "rafamadriz/friendly-snippets",
   {
     "MysticalDevil/inlay-hints.nvim",

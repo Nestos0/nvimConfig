@@ -59,15 +59,60 @@ local vue_ls_config = {
     end
   end,
 }
+
+local function start_tailwindcss()
+  local root_files = {
+    'tailwind.config.js',
+    'tailwind.config.cjs',
+    'tailwind.config.mjs',
+    'tailwind.config.ts',
+    'postcss.config.js',
+  }
+
+  local root_dir = vim.fs.root(0, root_files)
+
+  if root_dir then
+    vim.lsp.start({
+      name = 'tailwindcss',
+      cmd = { 'tailwindcss-language-server', '--stdio' },
+      root_dir = root_dir,
+      settings = {
+        tailwindCSS = {
+          includeLanguages = {
+            typescript = "javascript",
+            typescriptreact = "javascript",
+          },
+          experimental = {
+            classRegex = {
+              { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*)[\"'`]" },
+            },
+          },
+        },
+      },
+      -- 如果需要特定的 capabilities（如 nvim-cmp 支持）
+      capabilities = vim.lsp.protocol.make_client_capabilities(),
+    })
+  end
+end
+
+-- 创建自动命令：当打开支持的文件类型时启动
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'html', 'css', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue', 'svelte' },
+  callback = function()
+    start_tailwindcss()
+  end,
+})
+
 vim.lsp.config("vtsls", vtsls_config)
 vim.lsp.config("vue_ls", vue_ls_config)
 vim.lsp.enable({ "vtsls", "vue_ls" })
 
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("clangd")
-vim.lsp.config("rust_analyzer", { cmd = "rust-analyzer", filetype = "rust" })
+-- vim.lsp.config("rust_analyzer", { cmd = "rust-analyzer", filetype = "rust" })
 vim.lsp.enable("rust_analyzer")
 vim.lsp.enable("cssls")
+vim.lsp.config("html", {})
 vim.lsp.enable("html")
 vim.lsp.enable("pyright")
 vim.lsp.enable("hls")
