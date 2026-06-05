@@ -18,9 +18,9 @@ o.cursorlineopt = "number"
 o.expandtab = true
 o.autoindent = true
 o.smartindent = true
-o.tabstop = 4
-o.shiftwidth = 4
-o.softtabstop = 4
+o.tabstop = 2
+o.shiftwidth = 2
+o.softtabstop = 2
 
 opt.fillchars = { eob = " " }
 o.ignorecase = true

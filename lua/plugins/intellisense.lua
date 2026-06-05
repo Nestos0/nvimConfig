@@ -21,6 +21,18 @@ return {
       }
     end,
   },
+  {
+    "Nestos0/tailwind-tools.nvim",
+    ft = { "vue", "html", "css", "javascript" },
+    name = "tailwind-tools",
+    build = ":UpdateRemotePlugins",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-telescope/telescope.nvim", -- optional
+      "neovim/nvim-lspconfig",
+    },
+    opts = {}, -- your configuration
+  },
   "rafamadriz/friendly-snippets",
   {
     "MysticalDevil/inlay-hints.nvim",
@@ -157,7 +169,7 @@ return {
       },
       cmdline = {
         keymap = {
-          ["<C-n>"] = { "show", "show_documentation", "hide_documentation" },
+          ["<C-d>"] = { "show_documentation", "hide_documentation" },
           ["<Right>"] = { "accept", "fallback" },
           ["<CR>"] = {
             function(cmp)
@@ -169,8 +181,8 @@ return {
           },
           ["<C-e>"] = { "hide", "fallback" },
 
-          ["<Tab>"] = { "show", "select_next", "fallback" },
-          ["<S-Tab>"] = { "select_prev", "fallback" },
+          ["<C-n>"] = { "show", "select_next", "fallback" },
+          ["<C-p>"] = { "select_prev", "fallback" },
 
           ["<C-b>"] = { "scroll_documentation_up", "fallback" },
           ["<C-f>"] = { "scroll_documentation_down", "fallback" },
@@ -179,12 +191,13 @@ return {
       keymap = {
         preset = "none",
 
-        ["<C-n>"] = { "show", "show_documentation", "hide_documentation" },
+        ["<C-d>"] = { "show_documentation", "hide_documentation" },
+        ["<Tab>"] = { "select_and_accept", "fallback" },
         ["<CR>"] = { "accept", "fallback" },
         ["<C-e>"] = { "hide", "fallback" },
 
-        ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
-        ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+        ["<C-n>"] = { "show", "select_next", "snippet_forward", "fallback" },
+        ["<C-p>"] = { "show", "select_prev", "snippet_backward", "fallback" },
 
         ["<C-b>"] = { "scroll_documentation_up", "fallback" },
         ["<C-f>"] = { "scroll_documentation_down", "fallback" },

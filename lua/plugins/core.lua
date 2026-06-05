@@ -19,7 +19,7 @@ return {
     cmd = "Luarocks",
     priority = 9001, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
     opts = {
-      rocks = { "promise-async", "magick" }, -- specifies a list of rocks to install
+      rocks = { "promise-async", "magick", }, -- specifies a list of rocks to install
       -- luarocks_build_args = { "--with-lua=/my/path" }, -- extra options to pass to luarocks's configuration script
     },
   },

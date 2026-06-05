@@ -1,5 +1,22 @@
 return {
   {
+    "pysan3/fcitx5.nvim",
+    -- 仅在 Linux 且存在 fcitx5-remote 时加载
+    cond = vim.fn.executable("fcitx5-remote") == 1,
+    -- 建议在 ModeChanged 时按需加载，性能最优
+    event = "ModeChanged",
+    opts = {
+      -- 这里的 imname 可以通过在终端运行 `fcitx5-remote -n` 获取
+      -- 通常中文状态是 "pinyin" 或 "rime"，英文是 "keyboard-us"
+      imname = {
+        norm = nil, -- 进入 Normal 模式时恢复的状态（nil 表示不强制恢复，由插件逻辑处理）
+        ins = nil, -- 进入 Insert 模式时恢复的状态
+      },
+      remember_prior = true, -- 记住每个 buffer 之前的输入状态
+      define_autocmd = true, -- 自动定义 autocmd 切换模式
+    },
+  },
+  {
     "jakemason/ouroboros",
     dependencies = { { "nvim-lua/plenary.nvim" } },
     opts = {

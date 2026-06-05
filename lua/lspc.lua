@@ -1,118 +1,75 @@
-local vue_language_server_path = "~/.local/share/nvim/mason/packages/vue-language-server/node_modules/@vue/language-server/"
-local tsserver_filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" }
-local vue_plugin = {
-  name = "@vue/typescript-plugin",
-  location = vue_language_server_path,
-  languages = { "vue" },
-  configNamespace = "typescript",
-}
-local vtsls_config = {
+local mason_bin_path = vim.fn.stdpath("data") .. "/mason/bin/"
+local mason_package_path = vim.fn.stdpath("data") .. "/mason/packages/"
+
+local vtsls_opts = {
+  name = "vtsls",
+  cmd = { mason_bin_path .. "vtsls", "--stdio" },
+  root_dir = vim.fs.root(0, { "package.json", "tsconfig.json", "jsconfig.json", ".git" }),
   settings = {
     vtsls = {
       tsserver = {
         globalPlugins = {
-          vue_plugin,
+          {
+            name = "@vue/typescript-plugin",
+            location = mason_package_path .. "vue-language-server/node_modules/@vue/language-server",
+            languages = { "vue" },
+            configNamespace = "typescript",
+          },
         },
       },
     },
   },
-  filetypes = tsserver_filetypes,
 }
 
-local vue_ls_config = {
+local vue_ls_opts = {
+  name = "vue_ls",
+  cmd = { mason_bin_path .. "vue-language-server", "--stdio" },
+  root_dir = vim.fs.root(0, { "package.json", "vite.config.ts", "vue.config.js", "vite.config.js", ".git" }),
   on_init = function(client)
     client.handlers["tsserver/request"] = function(_, result, context)
-      local ts_clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "ts_ls" })
       local vtsls_clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "vtsls" })
-      local clients = {}
-
-      vim.list_extend(clients, ts_clients)
-      vim.list_extend(clients, vtsls_clients)
-
-      if #clients == 0 then
-        vim.notify(
-          "Could not find `vtsls` or `ts_ls` lsp client, `vue_ls` would not work without it.",
-          vim.log.levels.ERROR
-        )
-        return
-      end
-      local ts_client = clients[1]
-
+      if #vtsls_clients == 0 then return end
+      local ts_client = vtsls_clients[1]
       local param = unpack(result)
       local id, command, payload = unpack(param)
       ts_client:exec_cmd({
-        title = "vue_request_forward", -- You can give title anything as it's used to represent a command in the UI, `:h Client:exec_cmd`
         command = "typescript.tsserverRequest",
-        arguments = {
-          command,
-          payload,
-        },
+        arguments = { command, payload },
       }, { bufnr = context.bufnr }, function(_, r)
         local response = r and r.body
-        -- TODO: handle error or response nil here, e.g. logging
-        -- NOTE: Do NOT return if there's an error or no response, just return nil back to the vue_ls to prevent memory leak
-        local response_data = { { id, response } }
-
-        ---@diagnostic disable-next-line: param-type-mismatch
-        client:notify("tsserver/response", response_data)
+        client:notify("tsserver/response", { { id, response } })
       end)
     end
   end,
 }
 
-local function start_tailwindcss()
-  local root_files = {
-    'tailwind.config.js',
-    'tailwind.config.cjs',
-    'tailwind.config.mjs',
-    'tailwind.config.ts',
-    'postcss.config.js',
-  }
+local html_opts = {
+  name = "html",
+  cmd = { mason_bin_path .. "vscode-html-language-server", "--stdio" },
+  root_dir = vim.fs.root(0, { "package.json", ".git" }),
+}
 
-  local root_dir = vim.fs.root(0, root_files)
+local lsp_group = vim.api.nvim_create_augroup("UserVueLspConfig", { clear = true })
 
-  if root_dir then
-    vim.lsp.start({
-      name = 'tailwindcss',
-      cmd = { 'tailwindcss-language-server', '--stdio' },
-      root_dir = root_dir,
-      settings = {
-        tailwindCSS = {
-          includeLanguages = {
-            typescript = "javascript",
-            typescriptreact = "javascript",
-          },
-          experimental = {
-            classRegex = {
-              { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*)[\"'`]" },
-            },
-          },
-        },
-      },
-      -- 如果需要特定的 capabilities（如 nvim-cmp 支持）
-      capabilities = vim.lsp.protocol.make_client_capabilities(),
-    })
-  end
-end
-
--- 创建自动命令：当打开支持的文件类型时启动
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'html', 'css', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue', 'svelte' },
-  callback = function()
-    start_tailwindcss()
+vim.api.nvim_create_autocmd("FileType", {
+  group = lsp_group,
+  pattern = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+  callback = function(args)
+    vim.lsp.start(vtsls_opts)
+    if vim.bo[args.buf].filetype == "vue" then
+      vim.lsp.start(vue_ls_opts)
+    end
   end,
 })
 
-vim.lsp.config("vtsls", vtsls_config)
-vim.lsp.config("vue_ls", vue_ls_config)
-vim.lsp.enable({ "vtsls", "vue_ls" })
+vim.api.nvim_create_autocmd("FileType", {
+  group = lsp_group,
+  pattern = { "html" },
+  callback = function()
+    vim.lsp.start(html_opts)
+  end,
+})
 
-vim.lsp.enable("lua_ls")
-vim.lsp.enable("clangd")
--- vim.lsp.config("rust_analyzer", { cmd = "rust-analyzer", filetype = "rust" })
+vim.lsp.enable({ "lua_ls", "clangd", "pyright", "hls", "cssls" })
+vim.lsp.config("rust_analyzer", { cmd = { "rust-analyzer" }, filetypes = { "rust" } })
 vim.lsp.enable("rust_analyzer")
-vim.lsp.enable("cssls")
-vim.lsp.config("html", {})
-vim.lsp.enable("html")
-vim.lsp.enable("pyright")
-vim.lsp.enable("hls")
