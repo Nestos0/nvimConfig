@@ -22,6 +22,15 @@ return {
     end,
   },
   {
+    "mrcjkb/haskell-tools.nvim",
+    -- To avoid being surprised by breaking changes,
+    -- I recommend you set a version range
+    version = "^10",
+    -- This plugin implements proper lazy-loading (see :h lua-plugin-lazy).
+    -- No need for lazy.nvim to lazy-load it.
+    lazy = false,
+  },
+  {
     "Nestos0/tailwind-tools.nvim",
     ft = { "vue", "html", "css", "javascript" },
     name = "tailwind-tools",

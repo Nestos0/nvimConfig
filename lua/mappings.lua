@@ -69,7 +69,6 @@ vim.keymap.set(modes, "H", "N", { desc = "Repeat latest find (opposite)", norema
 vim.keymap.set(modes, "K", "E", { desc = "Forward to next WORD end", noremap = true, silent = true })
 
 -- Control (C-) Combinations
-vim.keymap.set(modes, "<C-u>", "<C-y>", { desc = "Scroll Up (line)", noremap = true, silent = true })
 vim.keymap.set(modes, "<C-f>", "<PageUp>", { desc = "Page Up", noremap = true, silent = true })
 vim.keymap.set(modes, "<C-b>", "<PageDown>", { desc = "Page Down", noremap = true, silent = true })
 vim.keymap.set(modes, "<C-LeftMouse>", "<Nop>", { desc = "Disable Left Mouse", noremap = true, silent = true })
