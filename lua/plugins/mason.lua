@@ -73,7 +73,6 @@ return {
           "emmet_language_server",
           "dockerls",
           "docker_compose_language_service",
-          "nginx_language_server",
           "eslint",
           "serve_d"
         },
