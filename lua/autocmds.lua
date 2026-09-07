@@ -86,3 +86,11 @@ vim.api.nvim_create_autocmd("FileType", {
 --     vim.wo.list = false
 --   end,
 -- })
+--
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "haskell",
+    callback = function()
+        vim.bo.indentexpr = ""
+    end,
+})

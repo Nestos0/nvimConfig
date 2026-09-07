@@ -13,7 +13,6 @@ return {
     init = function()
       local ensure_installed = {
         "c",
-        "haskell",
         "lua",
         "vim",
         "vimdoc",
@@ -36,11 +35,18 @@ return {
         :totable()
       require("nvim-treesitter").install(parsersToInstall)
       vim.api.nvim_create_autocmd("FileType", {
-        callback = function()
+        callback = function(args)
           -- Enable treesitter highlighting and disable regex syntax
           pcall(vim.treesitter.start)
+          
+          local disable = {
+            awk = true,
+          }
+
           -- Enable treesitter-based indentation
-          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          if not disable[args.match] then
+            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          end
         end,
       })
       -- ...

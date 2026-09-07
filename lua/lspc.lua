@@ -28,7 +28,9 @@ local vue_ls_opts = {
   on_init = function(client)
     client.handlers["tsserver/request"] = function(_, result, context)
       local vtsls_clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "vtsls" })
-      if #vtsls_clients == 0 then return end
+      if #vtsls_clients == 0 then
+        return
+      end
       local ts_client = vtsls_clients[1]
       local param = unpack(result)
       local id, command, payload = unpack(param)
@@ -70,6 +72,23 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-vim.lsp.enable({ "lua_ls", "clangd", "pyright", "hls", "cssls" })
+vim.lsp.config("basedpyright", {
+  cmd = { "basedpyright-langserver", "--stdio" },
+  filetypes = { "python" },
+  settings = {
+    basedpyright = {
+      analysis = {
+        typeCheckingMode = "standard",
+        reportIgnoreCommentWithoutRule = "false",
+        enableTypeIgnoreComments = true,
+        reportAny = "false",
+        reportExplicitAny = "none",
+      },
+    },
+  },
+})
+
+vim.lsp.enable({ "lua_ls", "clangd", "basedpyright", "hls", "cssls", "bash", "hls" })
+
 vim.lsp.config("rust_analyzer", { cmd = { "rust-analyzer" }, filetypes = { "rust" } })
 vim.lsp.enable("rust_analyzer")

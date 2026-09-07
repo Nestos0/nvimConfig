@@ -30,6 +30,9 @@ return {
     -- No need for lazy.nvim to lazy-load it.
     lazy = false,
   },
+  { "neovimhaskell/haskell-vim", ft = "haskell" },
+
+  -- { "alx741/vim-hindent", ft = "haskell" },
   {
     "Nestos0/tailwind-tools.nvim",
     ft = { "vue", "html", "css", "javascript" },
@@ -254,6 +257,7 @@ return {
           python = { "isort", "black" },
           javascript = { "prettierd", "prettier" },
           typescript = { "prettierd", "prettier" },
+          haskell = { "ormolu", "fourmolu" },
           html = { "prettierd", "prettier" },
           vue = { "prettierd", "prettier" },
           css = { "prettierd", "prettier" },
@@ -261,6 +265,7 @@ return {
           typescriptreact = { "prettierd", "prettier", "biome" },
           javascriptreact = { "prettierd", "prettier", "biome" },
           json = { "jq" },
+          markdown = { "prettier" },
         },
         formatters = {
           biome = { require_cwd = true },
